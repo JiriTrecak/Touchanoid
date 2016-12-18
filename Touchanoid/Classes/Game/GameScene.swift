@@ -22,6 +22,21 @@ private let ROW_HEIGHT: CGFloat = 50
 private let OFFSET_TOP: CGFloat = 50
 private let OFFSET_SIDE: CGFloat = 50
 
+enum GameState {
+    case ready
+    case playing
+    case paused
+    case ended
+}
+
+struct CollisionCategory {
+    static let None:        UInt32 = 0      //  0
+    static let Edge:        UInt32 = 0b1    //  1
+    static let Paddle:      UInt32 = 0b10   //  2
+    static let Ball:        UInt32 = 0b100  //  4
+    static let Wall:        UInt32 = 0b1000 //  8
+}
+
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 // MARK: - Extension - Touch Bar
@@ -33,6 +48,8 @@ class GameScene: SKScene {
     
     var wallPrefab: SKShapeNode!
     var ballNode: SKSpriteNode!
+    var edgeNode: SKShapeNode!
+    var gameState: GameState = .ready
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -51,12 +68,13 @@ class GameScene: SKScene {
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-    // MARK: - Level manipulation
+    // MARK: - Game setup
     
     func setupLevel() {
         
         self.makePrefabs()
         
+        self.generateEdge()
         self.generateGrid()
         self.generatePaddle()
         self.generateBall()
@@ -71,6 +89,9 @@ class GameScene: SKScene {
         self.view?.showsDrawCount = true
         self.view?.showsQuadCount = true
         self.view?.showsNodeCount = true
+        
+        self.physicsWorld.contactDelegate = self
+        self.physicsWorld.gravity = CGVector.zero
     }
     
     
@@ -78,6 +99,7 @@ class GameScene: SKScene {
         
         // Create wall prefab
         self.wallPrefab = SKShapeNode.init(rectOf: self.wallSizeFor(rows: 6, columns: 8), cornerRadius: 0)
+        self.wallPrefab.name = "wall"
         
         self.wallPrefab.lineWidth = 2.5
         self.wallPrefab.strokeColor = SKColor.green
@@ -85,6 +107,18 @@ class GameScene: SKScene {
                                                                       SKAction.fadeAlpha(to: 0.3, duration: 1),
                                                                       SKAction.fadeAlpha(to: 1, duration: 1)
                                                                      ])))
+        
+        self.wallPrefab.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
+        self.wallPrefab.physicsBody?.friction = 0
+        self.wallPrefab.physicsBody?.restitution = 0
+        self.wallPrefab.physicsBody?.allowsRotation = false
+        self.wallPrefab.physicsBody?.isDynamic = false
+        self.wallPrefab.physicsBody?.angularDamping = 0
+        self.wallPrefab.physicsBody?.linearDamping = 0
+        self.wallPrefab.physicsBody?.usesPreciseCollisionDetection = true
+        self.wallPrefab.physicsBody?.categoryBitMask = CollisionCategory.Wall
+        self.wallPrefab.physicsBody?.contactTestBitMask = CollisionCategory.Ball
+        self.wallPrefab.physicsBody?.collisionBitMask = CollisionCategory.Ball
     }
     
     
@@ -97,15 +131,60 @@ class GameScene: SKScene {
         
         self.ballNode.physicsBody = SKPhysicsBody(circleOfRadius: self.ballNode.frame.size.width / 2)
         self.ballNode.physicsBody?.friction = 0
+        self.ballNode.physicsBody?.usesPreciseCollisionDetection = true
         self.ballNode.physicsBody?.restitution = 0
+        self.ballNode.physicsBody?.angularDamping = 0
         self.ballNode.physicsBody?.linearDamping = 0
         self.ballNode.physicsBody?.allowsRotation = false
+        self.ballNode.physicsBody?.categoryBitMask = CollisionCategory.Ball
+        self.ballNode.physicsBody?.contactTestBitMask = CollisionCategory.Wall | CollisionCategory.Edge
+        self.ballNode.physicsBody?.collisionBitMask = CollisionCategory.Wall | CollisionCategory.Edge
+    }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Game state manipulation
+    
+    func startGame() {
+        
+        if self.gameState == .ready {
+            self.gameState = .playing
+            self.ballNode.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
+        }
+    }
+    
+    
+    func restartGame() {
+        
+        // Pause the game
+        self.gameState = .paused
+        
+        // Remove everything in scene
+        self.removeAllChildren()
+        self.removeAllActions()
+        
+        // Configure current level
+        self.setupLevel()
+        
+        // Prepare the game
+        self.gameState = .ready
     }
     
     
     func generatePaddle() {
         
         
+    }
+    
+    
+    func generateEdge() {
+        
+        let frame = self.view!.frame
+        let edgeFrame = CGRect(x: -frame.size.width / 2, y: -frame.size.height / 2, width: frame.size.width, height: frame.size.height)
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: edgeFrame)
+        self.physicsBody?.categoryBitMask = CollisionCategory.Edge
+        self.physicsBody?.contactTestBitMask = CollisionCategory.Ball
+        self.physicsBody?.collisionBitMask = CollisionCategory.Ball
     }
     
     
@@ -121,8 +200,8 @@ class GameScene: SKScene {
             [1, 1, 0, 1, 1, 0, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 0, 1, 1, 0, 1, 1],
-            [1, 1, 1, 0, 0, 1, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1]
+            [0, 1, 1, 0, 0, 1, 1, 0],
+            [0, 0, 1, 1, 1, 1, 0, 0]
         ]
         
         for (row, columnStorage) in levelArray.enumerated() {
@@ -181,6 +260,74 @@ class GameScene: SKScene {
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Key events
+    
+    
+    override func keyUp(with event: NSEvent) {
+        
+        self.handleKeyEvent(event: event, keyDown: false)
+    }
+    
+    
+    public func handleKeyEvent(event: NSEvent, keyDown: Bool){
+        
+        if event.modifierFlags.contains(NSEventModifierFlags.numericPad) {
+            if let theArrow = event.charactersIgnoringModifiers, let keyChar = theArrow.unicodeScalars.first?.value {
+                switch Int(keyChar){
+                    case NSRightArrowFunctionKey:
+                        self.handleRightArrowKey()
+                        break
+                    case NSLeftArrowFunctionKey:
+                        self.handleLeftArrowKey()
+                        break
+                    default:
+                        break
+                }
+            }
+        } else if let characters = event.characters {
+            for character in characters.characters{
+                switch character {
+                    case " ":
+                        self.handleSpace()
+                        break
+                    case "r":
+                        self.handleRestart()
+                        break
+                    default:
+                        print(character)
+                }
+            }
+        }
+    }
+    
+    
+    func handleSpace() {
+        
+        self.startGame()
+        NSLog("space")
+    }
+    
+    
+    func handleRestart() {
+        
+        self.restartGame()
+        NSLog("restart")
+    }
+    
+    
+    func handleRightArrowKey() {
+        
+        NSLog("right")
+    }
+    
+    
+    func handleLeftArrowKey() {
+        
+        NSLog("left")
+    }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Convenience
     
     func screenCoordinateOffset() -> CGSize {
@@ -198,4 +345,50 @@ class GameScene: SKScene {
         
         return view?.frame.size ?? CGSize.zero
     }
+    
+    
+    override func didSimulatePhysics() {
+        
+        super.didSimulatePhysics()
+        
+        // Update ball vector
+        // self.updateBallVelocity()
+    }
+    
+    
+    func updateBallVelocity() {
+        let previousVelocity = self.ballNode.physicsBody!.velocity
+        NSLog("velocity %f, %f", previousVelocity.dx, previousVelocity.dy)
+        let x = previousVelocity.dx > 0 ? 1 : -1
+        let y = previousVelocity.dy > 0 ? 1 : -1
+        self.ballNode.physicsBody?.velocity = CGVector(dx: x, dy: y)
+    }
 }
+
+
+// --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+// MARK: - Extension - Physics delegate
+
+extension GameScene: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        if contact.bodyA.node?.name == "ball" && contact.bodyB.node?.name == "wall" {
+            self.destroy(wall: contact.bodyB.node!)
+        } else if contact.bodyA.node?.name == "wall" && contact.bodyB.node?.name == "ball" {
+            self.destroy(wall: contact.bodyA.node!)
+        } else {
+            NSLog("different collision")
+        }
+    }
+    
+    func destroy(wall: SKNode) {
+        wall.removeFromParent()
+    }
+}
+
+
+
+
+
+
