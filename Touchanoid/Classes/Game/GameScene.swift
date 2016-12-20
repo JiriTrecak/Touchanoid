@@ -22,7 +22,7 @@ private let ROW_HEIGHT: CGFloat = 50
 private let OFFSET_TOP: CGFloat = 50
 private let OFFSET_SIDE: CGFloat = 50
 private let BALL_SPEED: CGVector = CGVector(dx: 5, dy: 5)
-private let PADDLE_ACCELERATION_IMPULSE: CGFloat = 2
+private let PADDLE_ACCELERATION_IMPULSE: CGFloat = 5
 private let PADDLE_STARTING_POSITION: CGPoint = CGPoint(x: 0, y: -315)
 
 enum GameState {
@@ -241,7 +241,7 @@ class GameScene: SKScene {
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 0, 1, 1, 0, 1, 1],
             [0, 1, 1, 0, 0, 1, 1, 0],
-            [0, 0, 1, 1, 1, 1, 0, 0]
+            [2, 2, 2, 2, 2, 2, 2, 2]
         ]
         
         for (row, columnStorage) in levelArray.enumerated() {
@@ -260,8 +260,13 @@ class GameScene: SKScene {
         }
         
         // Generate wall segment and configure its properties based on the type
+        let wallObject = Wall()
+        wallObject.configureWithType(type: type)
+        
         let wallItem = self.wallPrefab.copy() as! SKShapeNode
+        wallItem.userData = ["storage" : wallObject]
         wallItem.position = self.positionOfWallFor(row: row, column: column, rows: cY, columns: cX)
+        self.configureWall(wall: wallItem, withObject: wallObject)
         self.addChild(wallItem)
     }
     
@@ -455,16 +460,33 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         
         if contact.bodyA.node?.name == "ball" && contact.bodyB.node?.name == "wall" {
-            self.destroy(wall: contact.bodyB.node!)
+            self.contact(wall: contact.bodyB.node! as! SKShapeNode)
         } else if contact.bodyA.node?.name == "wall" && contact.bodyB.node?.name == "ball" {
-            self.destroy(wall: contact.bodyA.node!)
+            self.contact(wall: contact.bodyA.node! as! SKShapeNode)
         } else {
             NSLog("different collision")
         }
     }
     
-    func destroy(wall: SKNode) {
-        wall.removeFromParent()
+    func contact(wall: SKShapeNode) {
+        
+        let wallObject = wall.userData!["storage"] as! Wall
+        wallObject.health -= 1
+        
+        if wallObject.health == 0 {
+            wall.removeFromParent()
+        } else {
+            self.configureWall(wall: wall, withObject: wallObject)
+        }
+    }
+    
+    func configureWall(wall: SKShapeNode, withObject object: Wall) {
+        
+        if object.health == 1 {
+            wall.strokeColor = NSColor.green
+        } else if object.health == 2 {
+            wall.strokeColor = NSColor.blue
+        }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {

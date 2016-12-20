@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1E2DB31E0998840089706B /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E2DB21E0998840089706B /* Wall.swift */; };
 		0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE93171E06DE7E00BC0908 /* GameScene.swift */; };
 		0BCE93251E06DE7E00BC0908 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE93191E06DE7E00BC0908 /* MainVC.swift */; };
 		0BCE93261E06DE7E00BC0908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE931B1E06DE7E00BC0908 /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B1E2DB21E0998840089706B /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		0BCE92FB1E06DB0300BC0908 /* Touchanoid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touchanoid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BCE93171E06DE7E00BC0908 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		0BCE93191E06DE7E00BC0908 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B1E2DB11E0998750089706B /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				0B1E2DB21E0998840089706B /* Wall.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		0BCE92F21E06DB0300BC0908 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +92,7 @@
 		0BCE93161E06DE7E00BC0908 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				0B1E2DB11E0998750089706B /* Objects */,
 				0BCE93171E06DE7E00BC0908 /* GameScene.swift */,
 			);
 			path = Game;
@@ -215,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BCE93301E06E45600BC0908 /* Extensions.swift in Sources */,
+				0B1E2DB31E0998840089706B /* Wall.swift in Sources */,
 				0BCE93261E06DE7E00BC0908 /* AppDelegate.swift in Sources */,
 				0BCE93251E06DE7E00BC0908 /* MainVC.swift in Sources */,
 				0BCE932D1E06E31700BC0908 /* MainWC.swift in Sources */,
@@ -364,6 +376,7 @@
 				0BCE93121E06DB0300BC0908 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
