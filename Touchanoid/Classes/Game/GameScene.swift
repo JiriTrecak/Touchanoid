@@ -114,10 +114,11 @@ class GameScene: SKScene {
         
         self.wallPrefab.lineWidth = 2.5
         self.wallPrefab.strokeColor = SKColor.green
-        self.wallPrefab.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                                                      SKAction.fadeAlpha(to: 0.3, duration: 1),
-                                                                      SKAction.fadeAlpha(to: 1, duration: 1)
-                                                                     ])))
+        self.wallPrefab.fillColor = self.wallPrefab.strokeColor.withAlphaComponent(0.3)
+//        self.wallPrefab.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.5),
+//                                                                      SKAction.fadeAlpha(to: 0.3, duration: 1),
+//                                                                      SKAction.fadeAlpha(to: 1, duration: 1)
+//                                                                     ])))
         
         self.wallPrefab.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
         self.wallPrefab.physicsBody?.friction = 0
@@ -185,16 +186,17 @@ class GameScene: SKScene {
     func generatePaddle() {
         
         // Create paddle prefab
-        self.paddleNode = SKShapeNode.init(rectOf: CGSize(width: 100, height: 20), cornerRadius: 0)
+        self.paddleNode = SKShapeNode.init(rectOf: CGSize(width: 120, height: 20), cornerRadius: 0)
         self.paddleNode.name = "paddle"
         self.paddleNode.position = CGPoint(x: 0, y: -315)
         
         self.paddleNode.lineWidth = 2.5
         self.paddleNode.strokeColor = SKColor.white
-        self.paddleNode.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                                                      SKAction.fadeAlpha(to: 0.3, duration: 1),
-                                                                      SKAction.fadeAlpha(to: 1, duration: 1)
-        ])))
+        self.paddleNode.fillColor = self.paddleNode.strokeColor.withAlphaComponent(0.3)
+//        self.paddleNode.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.5),
+//                                                                      SKAction.fadeAlpha(to: 0.3, duration: 1),
+//                                                                      SKAction.fadeAlpha(to: 1, duration: 1)
+//        ])))
         
         self.paddleNode.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
         self.paddleNode.physicsBody?.friction = 0
@@ -241,7 +243,7 @@ class GameScene: SKScene {
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 0, 1, 1, 0, 1, 1],
             [0, 1, 1, 0, 0, 1, 1, 0],
-            [2, 2, 2, 2, 2, 2, 2, 2]
+            [2, 2, 10, 2, 2, 10, 2, 2]
         ]
         
         for (row, columnStorage) in levelArray.enumerated() {
@@ -471,6 +473,12 @@ extension GameScene: SKPhysicsContactDelegate {
     func contact(wall: SKShapeNode) {
         
         let wallObject = wall.userData!["storage"] as! Wall
+        
+        // Ignore collision with impenetrable walls
+        if wallObject.type == 10 {
+            return
+        }
+        
         wallObject.health -= 1
         
         if wallObject.health == 0 {
@@ -482,11 +490,15 @@ extension GameScene: SKPhysicsContactDelegate {
     
     func configureWall(wall: SKShapeNode, withObject object: Wall) {
         
-        if object.health == 1 {
+        if object.type == 10 {
+            wall.strokeColor = NSColor.gray
+        } else if object.health == 1 {
             wall.strokeColor = NSColor.green
         } else if object.health == 2 {
             wall.strokeColor = NSColor.blue
         }
+        
+        wall.fillColor = wall.strokeColor.withAlphaComponent(0.3)
     }
     
     func didEnd(_ contact: SKPhysicsContact) {

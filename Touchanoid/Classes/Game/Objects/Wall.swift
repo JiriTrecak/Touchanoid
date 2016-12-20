@@ -23,6 +23,7 @@ class Wall {
     // MARK: - Properties
     
     var health: Int = 1
+    var type: Int = 1
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -34,6 +35,8 @@ class Wall {
     // MARK: - Setup
     
     func configureWithType(type: Int) {
+        
+        self.type = type
         
         switch type {
         case 1:
