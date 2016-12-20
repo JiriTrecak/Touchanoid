@@ -21,12 +21,21 @@ private let BLOCK_SPACING: CGFloat = 10
 private let ROW_HEIGHT: CGFloat = 50
 private let OFFSET_TOP: CGFloat = 50
 private let OFFSET_SIDE: CGFloat = 50
+private let BALL_SPEED: CGVector = CGVector(dx: 5, dy: 5)
+private let PADDLE_ACCELERATION_IMPULSE: CGFloat = 2
+private let PADDLE_STARTING_POSITION: CGPoint = CGPoint(x: 0, y: -315)
 
 enum GameState {
     case ready
     case playing
     case paused
     case ended
+}
+
+enum PaddleStateKey {
+    case none
+    case left
+    case right
 }
 
 struct CollisionCategory {
@@ -49,7 +58,9 @@ class GameScene: SKScene {
     var wallPrefab: SKShapeNode!
     var ballNode: SKSpriteNode!
     var edgeNode: SKShapeNode!
+    var paddleNode: SKShapeNode!
     var gameState: GameState = .ready
+    var currentPaddleStateKey: PaddleStateKey = .none
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -110,7 +121,7 @@ class GameScene: SKScene {
         
         self.wallPrefab.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
         self.wallPrefab.physicsBody?.friction = 0
-        self.wallPrefab.physicsBody?.restitution = 0
+        self.wallPrefab.physicsBody?.restitution = 1
         self.wallPrefab.physicsBody?.allowsRotation = false
         self.wallPrefab.physicsBody?.isDynamic = false
         self.wallPrefab.physicsBody?.angularDamping = 0
@@ -132,13 +143,13 @@ class GameScene: SKScene {
         self.ballNode.physicsBody = SKPhysicsBody(circleOfRadius: self.ballNode.frame.size.width / 2)
         self.ballNode.physicsBody?.friction = 0
         self.ballNode.physicsBody?.usesPreciseCollisionDetection = true
-        self.ballNode.physicsBody?.restitution = 0
+        self.ballNode.physicsBody?.restitution = 1
         self.ballNode.physicsBody?.angularDamping = 0
         self.ballNode.physicsBody?.linearDamping = 0
         self.ballNode.physicsBody?.allowsRotation = false
         self.ballNode.physicsBody?.categoryBitMask = CollisionCategory.Ball
-        self.ballNode.physicsBody?.contactTestBitMask = CollisionCategory.Wall | CollisionCategory.Edge
-        self.ballNode.physicsBody?.collisionBitMask = CollisionCategory.Wall | CollisionCategory.Edge
+        self.ballNode.physicsBody?.contactTestBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
+        self.ballNode.physicsBody?.collisionBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
     }
     
     
@@ -149,7 +160,7 @@ class GameScene: SKScene {
         
         if self.gameState == .ready {
             self.gameState = .playing
-            self.ballNode.physicsBody?.applyImpulse(CGVector(dx: 3, dy: 3))
+            self.ballNode.physicsBody?.applyImpulse(BALL_SPEED)
         }
     }
     
@@ -173,7 +184,30 @@ class GameScene: SKScene {
     
     func generatePaddle() {
         
+        // Create paddle prefab
+        self.paddleNode = SKShapeNode.init(rectOf: CGSize(width: 100, height: 20), cornerRadius: 0)
+        self.paddleNode.name = "paddle"
+        self.paddleNode.position = CGPoint(x: 0, y: -315)
         
+        self.paddleNode.lineWidth = 2.5
+        self.paddleNode.strokeColor = SKColor.white
+        self.paddleNode.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.5),
+                                                                      SKAction.fadeAlpha(to: 0.3, duration: 1),
+                                                                      SKAction.fadeAlpha(to: 1, duration: 1)
+        ])))
+        
+        self.paddleNode.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
+        self.paddleNode.physicsBody?.friction = 0
+        self.paddleNode.physicsBody?.restitution = 1
+        self.paddleNode.physicsBody?.allowsRotation = false
+        self.paddleNode.physicsBody?.isDynamic = true
+        self.paddleNode.physicsBody?.angularDamping = 0
+        self.paddleNode.physicsBody?.linearDamping = 0
+        self.paddleNode.physicsBody?.usesPreciseCollisionDetection = true
+        self.paddleNode.physicsBody?.categoryBitMask = CollisionCategory.Paddle
+        self.paddleNode.physicsBody?.contactTestBitMask = CollisionCategory.Ball | CollisionCategory.Edge
+        self.paddleNode.physicsBody?.collisionBitMask = CollisionCategory.Ball | CollisionCategory.Edge
+        self.addChild(self.paddleNode)
     }
     
     
@@ -182,6 +216,12 @@ class GameScene: SKScene {
         let frame = self.view!.frame
         let edgeFrame = CGRect(x: -frame.size.width / 2, y: -frame.size.height / 2, width: frame.size.width, height: frame.size.height)
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: edgeFrame)
+        self.physicsBody?.friction = 0
+        self.physicsBody?.usesPreciseCollisionDetection = true
+        self.physicsBody?.restitution = 1
+        self.physicsBody?.angularDamping = 0
+        self.physicsBody?.linearDamping = 0
+        self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = CollisionCategory.Edge
         self.physicsBody?.contactTestBitMask = CollisionCategory.Ball
         self.physicsBody?.collisionBitMask = CollisionCategory.Ball
@@ -255,30 +295,53 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
+        // Update paddle position to always stay on Y axis
+        if self.gameState == .playing {
+//            let body = self.paddleNode.physicsBody!
+//            let impulse = CGVector(dx: -body.velocity.dx, dy: -body.velocity.dy)
+//            self.paddleNode.physicsBody?.applyImpulse(impulse)
+            self.paddleNode.position = CGPoint(x: self.paddleNode.position.x, y: PADDLE_STARTING_POSITION.y)
+        }
+        
         // Called before each frame is rendered
+        if self.currentPaddleStateKey != .none && self.gameState == .playing {
+            
+            // Apply impulse to a paddle
+            let impulse = self.currentPaddleStateKey == .right ? PADDLE_ACCELERATION_IMPULSE : -PADDLE_ACCELERATION_IMPULSE
+            self.paddleNode.physicsBody!.applyImpulse(CGVector(dx: impulse, dy: 0))
+        }
+    }
+    
+    
+    func nullifyPaddleMovement() {
+        
+        self.paddleNode.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
     }
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Key events
     
-    
     override func keyUp(with event: NSEvent) {
         
         self.handleKeyEvent(event: event, keyDown: false)
     }
     
+    override func keyDown(with event: NSEvent) {
+        
+        self.handleKeyEvent(event: event, keyDown: true)
+    }
     
-    public func handleKeyEvent(event: NSEvent, keyDown: Bool){
+    public func handleKeyEvent(event: NSEvent, keyDown: Bool) {
         
         if event.modifierFlags.contains(NSEventModifierFlags.numericPad) {
             if let theArrow = event.charactersIgnoringModifiers, let keyChar = theArrow.unicodeScalars.first?.value {
                 switch Int(keyChar){
                     case NSRightArrowFunctionKey:
-                        self.handleRightArrowKey()
+                        self.handleRightArrowKey(up: !keyDown)
                         break
                     case NSLeftArrowFunctionKey:
-                        self.handleLeftArrowKey()
+                        self.handleLeftArrowKey(up: !keyDown)
                         break
                     default:
                         break
@@ -315,15 +378,33 @@ class GameScene: SKScene {
     }
     
     
-    func handleRightArrowKey() {
+    func handleRightArrowKey(up: Bool) {
         
-        NSLog("right")
+        if up {
+            NSLog("right up")
+            // TODO: handle holding left key
+            self.currentPaddleStateKey = .none
+            self.nullifyPaddleMovement()
+        // User is holding right arrow key
+        } else {
+            NSLog("right down")
+            self.currentPaddleStateKey = .right
+        }
     }
     
     
-    func handleLeftArrowKey() {
+    func handleLeftArrowKey(up: Bool) {
         
-        NSLog("left")
+        if up {
+            NSLog("left up")
+            // TODO: handle holding left key
+            self.currentPaddleStateKey = .none
+            self.nullifyPaddleMovement()
+            // User is holding right arrow key
+        } else {
+            NSLog("left down")
+            self.currentPaddleStateKey = .left
+        }
     }
     
     
@@ -352,17 +433,17 @@ class GameScene: SKScene {
         super.didSimulatePhysics()
         
         // Update ball vector
-        // self.updateBallVelocity()
+        // TODO:
     }
     
     
     func updateBallVelocity() {
         let previousVelocity = self.ballNode.physicsBody!.velocity
-        NSLog("velocity %f, %f", previousVelocity.dx, previousVelocity.dy)
         let x = previousVelocity.dx > 0 ? 1 : -1
         let y = previousVelocity.dy > 0 ? 1 : -1
         self.ballNode.physicsBody?.velocity = CGVector(dx: x, dy: y)
     }
+
 }
 
 
@@ -384,6 +465,14 @@ extension GameScene: SKPhysicsContactDelegate {
     
     func destroy(wall: SKNode) {
         wall.removeFromParent()
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        
+        // Force direction
+        if contact.bodyA.node?.name == "ball" {
+            
+        }
     }
 }
 
