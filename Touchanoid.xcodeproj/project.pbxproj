@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0B1E2DB31E0998840089706B /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E2DB21E0998840089706B /* Wall.swift */; };
+		0B73FF1D1E09AC660009FAE1 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1C1E09AC660009FAE1 /* Enums.swift */; };
+		0B73FF1F1E09ADB00009FAE1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */; };
 		0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE93171E06DE7E00BC0908 /* GameScene.swift */; };
 		0BCE93251E06DE7E00BC0908 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE93191E06DE7E00BC0908 /* MainVC.swift */; };
 		0BCE93261E06DE7E00BC0908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE931B1E06DE7E00BC0908 /* AppDelegate.swift */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		0B1E2DB21E0998840089706B /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		0B73FF1C1E09AC660009FAE1 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0BCE92FB1E06DB0300BC0908 /* Touchanoid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touchanoid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BCE93171E06DE7E00BC0908 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		0BCE93191E06DE7E00BC0908 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -146,7 +150,9 @@
 		0BCE932E1E06E43F00BC0908 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0B73FF1C1E09AC660009FAE1 /* Enums.swift */,
 				0BCE932F1E06E45600BC0908 /* Extensions.swift */,
+				0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -229,7 +235,9 @@
 				0B1E2DB31E0998840089706B /* Wall.swift in Sources */,
 				0BCE93261E06DE7E00BC0908 /* AppDelegate.swift in Sources */,
 				0BCE93251E06DE7E00BC0908 /* MainVC.swift in Sources */,
+				0B73FF1D1E09AC660009FAE1 /* Enums.swift in Sources */,
 				0BCE932D1E06E31700BC0908 /* MainWC.swift in Sources */,
+				0B73FF1F1E09ADB00009FAE1 /* Configuration.swift in Sources */,
 				0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

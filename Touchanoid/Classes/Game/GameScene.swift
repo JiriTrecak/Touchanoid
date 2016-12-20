@@ -16,36 +16,6 @@ import GameplayKit
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 // MARK: - Definitions
 
-private let RECT_SIZE: CGSize = CGSize(width: 40, height: 20)
-private let BLOCK_SPACING: CGFloat = 10
-private let ROW_HEIGHT: CGFloat = 50
-private let OFFSET_TOP: CGFloat = 50
-private let OFFSET_SIDE: CGFloat = 50
-private let BALL_SPEED: CGVector = CGVector(dx: 5, dy: 5)
-private let PADDLE_ACCELERATION_IMPULSE: CGFloat = 5
-private let PADDLE_STARTING_POSITION: CGPoint = CGPoint(x: 0, y: -315)
-
-enum GameState {
-    case ready
-    case playing
-    case paused
-    case ended
-}
-
-enum PaddleStateKey {
-    case none
-    case left
-    case right
-}
-
-struct CollisionCategory {
-    static let None:        UInt32 = 0      //  0
-    static let Edge:        UInt32 = 0b1    //  1
-    static let Paddle:      UInt32 = 0b10   //  2
-    static let Ball:        UInt32 = 0b100  //  4
-    static let Wall:        UInt32 = 0b1000 //  8
-}
-
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 // MARK: - Extension - Touch Bar
@@ -55,12 +25,15 @@ class GameScene: SKScene {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Properties
     
+    // World prefabs and objects
     var wallPrefab: SKShapeNode!
     var ballNode: SKSpriteNode!
     var edgeNode: SKShapeNode!
     var paddleNode: SKShapeNode!
+    
+    // Game state
     var gameState: GameState = .ready
-    var currentPaddleStateKey: PaddleStateKey = .none
+    var paddleState: PaddleState = .still
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -115,10 +88,6 @@ class GameScene: SKScene {
         self.wallPrefab.lineWidth = 2.5
         self.wallPrefab.strokeColor = SKColor.green
         self.wallPrefab.fillColor = self.wallPrefab.strokeColor.withAlphaComponent(0.3)
-//        self.wallPrefab.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                                                      SKAction.fadeAlpha(to: 0.3, duration: 1),
-//                                                                      SKAction.fadeAlpha(to: 1, duration: 1)
-//                                                                     ])))
         
         self.wallPrefab.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
         self.wallPrefab.physicsBody?.friction = 0
@@ -161,7 +130,7 @@ class GameScene: SKScene {
         
         if self.gameState == .ready {
             self.gameState = .playing
-            self.ballNode.physicsBody?.applyImpulse(BALL_SPEED)
+            self.ballNode.physicsBody?.applyImpulse(GameConfiguration.initialBallSpeed)
         }
     }
     
@@ -193,10 +162,6 @@ class GameScene: SKScene {
         self.paddleNode.lineWidth = 2.5
         self.paddleNode.strokeColor = SKColor.white
         self.paddleNode.fillColor = self.paddleNode.strokeColor.withAlphaComponent(0.3)
-//        self.paddleNode.run(SKAction.repeatForever(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-//                                                                      SKAction.fadeAlpha(to: 0.3, duration: 1),
-//                                                                      SKAction.fadeAlpha(to: 1, duration: 1)
-//        ])))
         
         self.paddleNode.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
         self.paddleNode.physicsBody?.friction = 0
@@ -242,22 +207,26 @@ class GameScene: SKScene {
             [1, 1, 0, 1, 1, 0, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 0, 1, 1, 0, 1, 1],
-            [0, 1, 1, 0, 0, 1, 1, 0],
+            [9, 9, 9, 9, 9, 9, 9, 9],
             [2, 2, 10, 2, 2, 10, 2, 2]
         ]
         
         for (row, columnStorage) in levelArray.enumerated() {
-            for (column, value) in columnStorage.enumerated() {
-                self.generateGridItemOf(type: value, row: row, column: column, cX: columnStorage.count, cY: levelArray.count)
+            for (column, rawWallType) in columnStorage.enumerated() {
+                if let wallType = WallType(rawValue: rawWallType) {
+                    self.generateGridItemOf(type: wallType, row: row, column: column, cX: columnStorage.count, cY: levelArray.count)
+                } else {
+                    assertionFailure("Definition of the level contains wrong wall type \(rawWallType). See Wall.swift for allowed types.")
+                }
             }
         }
     }
     
     
-    func generateGridItemOf(type: Int, row: Int, column: Int, cX: Int, cY: Int) {
+    func generateGridItemOf(type: WallType, row: Int, column: Int, cX: Int, cY: Int) {
         
         // Skip empty wall segment
-        if type == 0 {
+        if type == .Empty {
             return
         }
         
@@ -265,6 +234,7 @@ class GameScene: SKScene {
         let wallObject = Wall()
         wallObject.configureWithType(type: type)
         
+        // Generate the physical object in space
         let wallItem = self.wallPrefab.copy() as! SKShapeNode
         wallItem.userData = ["storage" : wallObject]
         wallItem.position = self.positionOfWallFor(row: row, column: column, rows: cY, columns: cX)
@@ -277,8 +247,8 @@ class GameScene: SKScene {
         
         // Calculate the size of the wall block based on the variables in level configuration
         
-        let width = (self.screenSize().width - (2.0 * OFFSET_SIDE) - (CGFloat(columns - 1) * BLOCK_SPACING)) / CGFloat(columns)
-        let height = ROW_HEIGHT
+        let width = (self.screenSize().width - (2.0 * GridConfiguration.spacingSide) - (CGFloat(columns - 1) * GridConfiguration.blockSpacing)) / CGFloat(columns)
+        let height = GridConfiguration.rowHeight
         
         return CGSize(width: width, height: height)
     }
@@ -289,34 +259,44 @@ class GameScene: SKScene {
         // Calculate the position of the wall block based on the variables in level configuration
         let wallSize = self.wallSizeFor(rows: rows, columns: columns)
         
-        let verticalSize = ROW_HEIGHT * CGFloat(rows) + BLOCK_SPACING * CGFloat(rows - 1)
-        let x = OFFSET_SIDE + (wallSize.width / 2.0) + ((wallSize.width + BLOCK_SPACING) * CGFloat(column)) - self.screenCoordinateOffset().width
-        let y = (wallSize.height / 2.0) - ((wallSize.height + BLOCK_SPACING) * CGFloat(row)) + (verticalSize) - OFFSET_TOP
+        let verticalSize = GridConfiguration.rowHeight * CGFloat(rows) + GridConfiguration.blockSpacing * CGFloat(rows - 1)
+        let x = GridConfiguration.spacingSide + (wallSize.width / 2.0) + ((wallSize.width + GridConfiguration.blockSpacing) * CGFloat(column)) - self.screenCoordinateOffset().width
+        let y = (wallSize.height / 2.0) - ((wallSize.height + GridConfiguration.blockSpacing) * CGFloat(row)) + (verticalSize) - GridConfiguration.spacingTop
         
         return CGPoint(x: x, y: y)
     }
     
     
+    func configureWall(wall: SKShapeNode, withObject object: Wall) {
+        
+        wall.fillColor = object.fillColor()
+        wall.strokeColor = object.strokeColor()
+    }
+    
+    
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-    // MARK: - Touch events
+    // MARK: - SK Physics
     
     override func update(_ currentTime: TimeInterval) {
         
         // Update paddle position to always stay on Y axis
         if self.gameState == .playing {
-//            let body = self.paddleNode.physicsBody!
-//            let impulse = CGVector(dx: -body.velocity.dx, dy: -body.velocity.dy)
-//            self.paddleNode.physicsBody?.applyImpulse(impulse)
-            self.paddleNode.position = CGPoint(x: self.paddleNode.position.x, y: PADDLE_STARTING_POSITION.y)
+            self.paddleNode.position = CGPoint(x: self.paddleNode.position.x, y: GameConfiguration.paddleStartingPosition.y)
         }
         
         // Called before each frame is rendered
-        if self.currentPaddleStateKey != .none && self.gameState == .playing {
+        if self.paddleState != .still && self.gameState == .playing {
             
             // Apply impulse to a paddle
-            let impulse = self.currentPaddleStateKey == .right ? PADDLE_ACCELERATION_IMPULSE : -PADDLE_ACCELERATION_IMPULSE
+            let impulse = self.paddleState == .movingRight ? GameConfiguration.paddleAcceleration : -GameConfiguration.paddleAcceleration
             self.paddleNode.physicsBody!.applyImpulse(CGVector(dx: impulse, dy: 0))
         }
+    }
+    
+    
+    override func didSimulatePhysics() {
+        
+        super.didSimulatePhysics()
     }
     
     
@@ -374,43 +354,39 @@ class GameScene: SKScene {
     func handleSpace() {
         
         self.startGame()
-        NSLog("space")
     }
     
     
     func handleRestart() {
         
         self.restartGame()
-        NSLog("restart")
     }
     
     
     func handleRightArrowKey(up: Bool) {
         
+        // User released right arrow key
         if up {
-            NSLog("right up")
-            // TODO: handle holding left key
-            self.currentPaddleStateKey = .none
+            self.paddleState = .still
             self.nullifyPaddleMovement()
+            
         // User is holding right arrow key
         } else {
-            NSLog("right down")
-            self.currentPaddleStateKey = .right
+            self.paddleState = .movingRight
         }
     }
     
     
     func handleLeftArrowKey(up: Bool) {
         
+        // User released left arrow key
         if up {
-            NSLog("left up")
-            // TODO: handle holding left key
-            self.currentPaddleStateKey = .none
+            self.paddleState = .still
             self.nullifyPaddleMovement()
-            // User is holding right arrow key
+            
+        // User is holding right arrow key
         } else {
-            NSLog("left down")
-            self.currentPaddleStateKey = .left
+            self.paddleState = .movingLeft
         }
     }
     
@@ -433,24 +409,6 @@ class GameScene: SKScene {
         
         return view?.frame.size ?? CGSize.zero
     }
-    
-    
-    override func didSimulatePhysics() {
-        
-        super.didSimulatePhysics()
-        
-        // Update ball vector
-        // TODO:
-    }
-    
-    
-    func updateBallVelocity() {
-        let previousVelocity = self.ballNode.physicsBody!.velocity
-        let x = previousVelocity.dx > 0 ? 1 : -1
-        let y = previousVelocity.dy > 0 ? 1 : -1
-        self.ballNode.physicsBody?.velocity = CGVector(dx: x, dy: y)
-    }
-
 }
 
 
@@ -470,43 +428,22 @@ extension GameScene: SKPhysicsContactDelegate {
         }
     }
     
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        
+    }
+    
+    
     func contact(wall: SKShapeNode) {
         
         let wallObject = wall.userData!["storage"] as! Wall
         
-        // Ignore collision with impenetrable walls
-        if wallObject.type == 10 {
-            return
-        }
-        
-        wallObject.health -= 1
-        
-        if wallObject.health == 0 {
+        // Handle wall collision with ball, remove it from space if it should be removed, otherwise update its state in space
+        wallObject.handleBallCollision(shouldRemove: { 
             wall.removeFromParent()
-        } else {
+        }, persists: {
             self.configureWall(wall: wall, withObject: wallObject)
-        }
-    }
-    
-    func configureWall(wall: SKShapeNode, withObject object: Wall) {
-        
-        if object.type == 10 {
-            wall.strokeColor = NSColor.gray
-        } else if object.health == 1 {
-            wall.strokeColor = NSColor.green
-        } else if object.health == 2 {
-            wall.strokeColor = NSColor.blue
-        }
-        
-        wall.fillColor = wall.strokeColor.withAlphaComponent(0.3)
-    }
-    
-    func didEnd(_ contact: SKPhysicsContact) {
-        
-        // Force direction
-        if contact.bodyA.node?.name == "ball" {
-            
-        }
+        })
     }
 }
 

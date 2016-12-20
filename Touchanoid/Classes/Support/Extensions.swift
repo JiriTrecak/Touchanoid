@@ -1,5 +1,5 @@
 //
-//  Extensions
+//  Extensions.swift
 //  Touchanoid
 //
 //  Created by Jiří Třečák on 18.12.16.
