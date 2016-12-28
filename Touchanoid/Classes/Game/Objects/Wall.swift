@@ -94,6 +94,26 @@ class Wall {
     }
     
     
+    static func thumbnailFillColor(ofType type: WallType) -> NSColor {
+        
+        // Configure wall types
+        switch type {
+        case .Empty:
+             return NSColor.clear
+        case .Invisible:
+            return NSColor.darkGray
+        case .Singular:
+            return NSColor.green
+        case .Double:
+            return NSColor.blue
+        case .Triple:
+            return NSColor.red
+        case .Indestructible:
+            return NSColor.gray
+        }
+    }
+    
+    
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Collision handling
     

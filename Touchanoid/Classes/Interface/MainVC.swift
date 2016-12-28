@@ -47,15 +47,13 @@ class MainVC: NSViewController {
                 view.presentScene(scene)
                 
                 // Setup current level
-                self.scene?.setupLevel()
+                self.scene?.configureWithLevel(level: GameManager.sharedInstance.randomLevel())
             }
             
             // Configure the SK view debug information
             view.ignoresSiblingOrder = true
             view.showsFPS = true
             view.showsNodeCount = true
-            view.showsPhysics = true
-            view.showsFields = true
         }
     }
     

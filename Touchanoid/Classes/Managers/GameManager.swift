@@ -31,7 +31,7 @@ public class GameManager {
     // MARK: - Properties
     
     public static let sharedInstance = GameManager()
-    var gameData: GameData!
+    private var gameData: GameData!
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -59,4 +59,29 @@ public class GameManager {
             assertionFailure(error.localizedDescription)
         }
     }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Level manipulation
+    
+    func randomLevel() -> Level {
+        
+        let index = Int(arc4random_uniform(UInt32(self.gameData.levels.count)))
+        return self.gameData.levels[index]
+    }
+    
+    
+    func numberOfLevels() -> Int {
+        
+        return self.gameData.levels.count
+    }
+    
+    
+    func level(index: Int) -> Level {
+        
+        return self.gameData.levels[index]
+    }
 }
+
+
+

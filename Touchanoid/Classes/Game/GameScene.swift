@@ -34,6 +34,7 @@ class GameScene: SKScene {
     // Game state
     var gameState: GameState = .ready
     var paddleState: PaddleState = .still
+    var currentLevel: Level!
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -54,7 +55,9 @@ class GameScene: SKScene {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Game setup
     
-    func setupLevel() {
+    func configureWithLevel(level: Level) {
+        
+        self.currentLevel = level
         
         self.makePrefabs()
         
@@ -135,7 +138,7 @@ class GameScene: SKScene {
         self.removeAllActions()
         
         // Configure current level
-        self.setupLevel()
+        self.configureWithLevel(level: GameManager.sharedInstance.randomLevel())
         
         // Prepare the game
         self.gameState = .ready
@@ -153,7 +156,7 @@ class GameScene: SKScene {
         self.paddleNode.strokeColor = SKColor.white
         self.paddleNode.fillColor = self.paddleNode.strokeColor.withAlphaComponent(0.3)
         
-        self.paddleNode.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
+        self.paddleNode.physicsBody = SKPhysicsBody(rectangleOf: self.paddleNode.frame.size)
         self.paddleNode.physicsBody?.usesPreciseCollisionDetection = true
         self.paddleNode.physicsBody?.categoryBitMask = CollisionCategory.Paddle
         self.paddleNode.physicsBody?.contactTestBitMask = CollisionCategory.Ball | CollisionCategory.Edge
@@ -195,14 +198,7 @@ class GameScene: SKScene {
     func generateGrid() {
         
         // Level array
-        let levelArray = [
-            [1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 0, 1, 1, 0, 1, 1],
-            [1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 1, 0, 1, 1, 0, 1, 1],
-            [9, 9, 9, 9, 9, 9, 9, 9],
-            [2, 2, 10, 2, 2, 10, 2, 2]
-        ]
+        let levelArray = self.currentLevel.levelDefinition
         
         for (row, columnStorage) in levelArray.enumerated() {
             for (column, rawWallType) in columnStorage.enumerated() {
@@ -327,7 +323,7 @@ class GameScene: SKScene {
                         break
                 }
             }
-        } else if let characters = event.characters {
+        } else if let characters = event.characters, keyDown {
             for character in characters.characters{
                 switch character {
                     case " ":

@@ -34,7 +34,7 @@ class Level : WRPObject {
         
         return [
             WRPProperty(remote: "name", bindTo: "name", type: .string),
-            WRPProperty(remote: "structure", bindTo: "structure", type: .array)
+            WRPProperty(remote: "structure", bindTo: "structure", type: .string)
         ]
     }
     
@@ -51,13 +51,54 @@ class Level : WRPObject {
         let rows = self.structure.components(separatedBy: "|")
         self.levelDefinition = rows.map { (row) -> [Int] in
             row.components(separatedBy: ",").map({ (cell) -> Int in
-                Int(cell)!
+                Int(cell.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))!
             })
         }
+    }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Convenience
+    
+    func thumbnail(constrainedToSize size: NSSize) -> NSImage {
         
-        NSLog("level definitions")
+        let image = NSImage(size: size)
+        let gridSpacing: CGFloat = 1.0
+        
+        // Go through level definition and draw a grid into image
+        for (row, columnStorage) in self.levelDefinition.enumerated() {
+            for (column, rawWallType) in columnStorage.enumerated() {
+                
+                // Each grid item is few pixel of solid color separated by 1 px empty space
+                let blockSize = CGSize(width: (size.width - CGFloat(columnStorage.count)) / CGFloat(columnStorage.count),
+                                       height: (size.height - CGFloat(self.levelDefinition.count)) / CGFloat(self.levelDefinition.count))
+                if let wallType = WallType(rawValue: rawWallType) {
+                    let position = CGPoint(x: CGFloat(column) * gridSpacing + CGFloat(column) * blockSize.width,
+                                           y: -CGFloat(row + 1) * gridSpacing + size.height - CGFloat(row) * blockSize.height - blockSize.height / 2)
+                    let color = Wall.thumbnailFillColor(ofType: wallType)
+                    image.drawRectangle(atPosition: position, size: blockSize, color: color)
+                } else {
+                    assertionFailure("Definition of the level contains wrong wall type \(rawWallType). See Wall.swift for allowed types.")
+                }
+            }
+        }
+        
+        return image
     }
 }
 
 
+extension NSImage {
+
+    func drawRectangle(atPosition position: CGPoint, size: CGSize, color: NSColor) {
+        
+        self.lockFocus()
+        color.setFill()
+        
+        let imageRect = NSRect(origin: position, size: size)
+        NSRectFillUsingOperation(imageRect, .destinationAtop)
+        
+        self.unlockFocus()
+    }
+}
 
