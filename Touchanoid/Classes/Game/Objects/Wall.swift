@@ -72,12 +72,15 @@ class Wall {
         switch type {
         case .Empty, .Invisible:
             return NSColor.clear
-        case .Singular:
-            return NSColor.green
-        case .Double:
-            return NSColor.blue
-        case .Triple:
-            return NSColor.red
+        case .Singular, .Double, .Triple:
+            if self.health == 1 {
+                return NSColor.green
+            } else if self.health == 2 {
+                return NSColor.blue
+            } else if self.health == 3 {
+                return NSColor.red
+            }
+            return NSColor.clear
         case .Indestructible:
             return NSColor.gray
         }

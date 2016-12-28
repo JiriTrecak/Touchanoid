@@ -90,16 +90,11 @@ class GameScene: SKScene {
         self.wallPrefab.fillColor = self.wallPrefab.strokeColor.withAlphaComponent(0.3)
         
         self.wallPrefab.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
-        self.wallPrefab.physicsBody?.friction = 0
-        self.wallPrefab.physicsBody?.restitution = 1
-        self.wallPrefab.physicsBody?.allowsRotation = false
-        self.wallPrefab.physicsBody?.isDynamic = false
-        self.wallPrefab.physicsBody?.angularDamping = 0
-        self.wallPrefab.physicsBody?.linearDamping = 0
         self.wallPrefab.physicsBody?.usesPreciseCollisionDetection = true
         self.wallPrefab.physicsBody?.categoryBitMask = CollisionCategory.Wall
         self.wallPrefab.physicsBody?.contactTestBitMask = CollisionCategory.Ball
         self.wallPrefab.physicsBody?.collisionBitMask = CollisionCategory.Ball
+        self.configureBodyToNotObeyPhysics(body: self.wallPrefab.physicsBody!, dynamic: false)
     }
     
     
@@ -111,15 +106,10 @@ class GameScene: SKScene {
         self.addChild(self.ballNode)
         
         self.ballNode.physicsBody = SKPhysicsBody(circleOfRadius: self.ballNode.frame.size.width / 2)
-        self.ballNode.physicsBody?.friction = 0
-        self.ballNode.physicsBody?.usesPreciseCollisionDetection = true
-        self.ballNode.physicsBody?.restitution = 1
-        self.ballNode.physicsBody?.angularDamping = 0
-        self.ballNode.physicsBody?.linearDamping = 0
-        self.ballNode.physicsBody?.allowsRotation = false
         self.ballNode.physicsBody?.categoryBitMask = CollisionCategory.Ball
         self.ballNode.physicsBody?.contactTestBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
         self.ballNode.physicsBody?.collisionBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
+        self.configureBodyToNotObeyPhysics(body: self.ballNode.physicsBody!, dynamic: true)
     }
     
     
@@ -164,16 +154,11 @@ class GameScene: SKScene {
         self.paddleNode.fillColor = self.paddleNode.strokeColor.withAlphaComponent(0.3)
         
         self.paddleNode.physicsBody = SKPhysicsBody(rectangleOf: self.wallPrefab.frame.size)
-        self.paddleNode.physicsBody?.friction = 0
-        self.paddleNode.physicsBody?.restitution = 1
-        self.paddleNode.physicsBody?.allowsRotation = false
-        self.paddleNode.physicsBody?.isDynamic = true
-        self.paddleNode.physicsBody?.angularDamping = 0
-        self.paddleNode.physicsBody?.linearDamping = 0
         self.paddleNode.physicsBody?.usesPreciseCollisionDetection = true
         self.paddleNode.physicsBody?.categoryBitMask = CollisionCategory.Paddle
         self.paddleNode.physicsBody?.contactTestBitMask = CollisionCategory.Ball | CollisionCategory.Edge
         self.paddleNode.physicsBody?.collisionBitMask = CollisionCategory.Ball | CollisionCategory.Edge
+        self.configureBodyToNotObeyPhysics(body: self.paddleNode.physicsBody!, dynamic: true)
         self.addChild(self.paddleNode)
     }
     
@@ -183,15 +168,23 @@ class GameScene: SKScene {
         let frame = self.view!.frame
         let edgeFrame = CGRect(x: -frame.size.width / 2, y: -frame.size.height / 2, width: frame.size.width, height: frame.size.height)
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: edgeFrame)
-        self.physicsBody?.friction = 0
         self.physicsBody?.usesPreciseCollisionDetection = true
-        self.physicsBody?.restitution = 1
-        self.physicsBody?.angularDamping = 0
-        self.physicsBody?.linearDamping = 0
-        self.physicsBody?.allowsRotation = false
+
         self.physicsBody?.categoryBitMask = CollisionCategory.Edge
         self.physicsBody?.contactTestBitMask = CollisionCategory.Ball
         self.physicsBody?.collisionBitMask = CollisionCategory.Ball
+        self.configureBodyToNotObeyPhysics(body: self.physicsBody!, dynamic: false)
+    }
+    
+    
+    func configureBodyToNotObeyPhysics(body: SKPhysicsBody, dynamic: Bool) {
+        
+        body.friction = 0
+        body.restitution = 1
+        body.angularDamping = 0
+        body.linearDamping = 0
+        body.allowsRotation = false
+        body.isDynamic = dynamic
     }
     
     

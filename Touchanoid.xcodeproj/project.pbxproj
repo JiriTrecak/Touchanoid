@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0B1E2DB31E0998840089706B /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E2DB21E0998840089706B /* Wall.swift */; };
+		0B27F8C41E13EA53005D8E07 /* Game.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B27F8C31E13EA53005D8E07 /* Game.json */; };
+		0B27F8C61E13EC11005D8E07 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B27F8C51E13EC11005D8E07 /* GameData.swift */; };
+		0B27F8C81E13ECD5005D8E07 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B27F8C71E13ECD5005D8E07 /* GameManager.swift */; };
+		0B4D5B011E13D25400A9FBC7 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D5B001E13D25400A9FBC7 /* Level.swift */; };
 		0B73FF1D1E09AC660009FAE1 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1C1E09AC660009FAE1 /* Enums.swift */; };
 		0B73FF1F1E09ADB00009FAE1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */; };
 		0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE93171E06DE7E00BC0908 /* GameScene.swift */; };
@@ -19,10 +23,15 @@
 		0BCE932B1E06DE7E00BC0908 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BCE93231E06DE7E00BC0908 /* Main.storyboard */; };
 		0BCE932D1E06E31700BC0908 /* MainWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE932C1E06E31700BC0908 /* MainWC.swift */; };
 		0BCE93301E06E45600BC0908 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE932F1E06E45600BC0908 /* Extensions.swift */; };
+		80D60A81C339268193409569 /* Pods_Touchanoid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD52318507ACB30F47199947 /* Pods_Touchanoid.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0B1E2DB21E0998840089706B /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		0B27F8C31E13EA53005D8E07 /* Game.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Game.json; sourceTree = "<group>"; };
+		0B27F8C51E13EC11005D8E07 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		0B27F8C71E13ECD5005D8E07 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		0B4D5B001E13D25400A9FBC7 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		0B73FF1C1E09AC660009FAE1 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0BCE92FB1E06DB0300BC0908 /* Touchanoid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touchanoid.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +45,9 @@
 		0BCE93231E06DE7E00BC0908 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0BCE932C1E06E31700BC0908 /* MainWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWC.swift; sourceTree = "<group>"; };
 		0BCE932F1E06E45600BC0908 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		3C7EEFB1E41B70EBAFF3E213 /* Pods-Touchanoid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Touchanoid.release.xcconfig"; path = "Pods/Target Support Files/Pods-Touchanoid/Pods-Touchanoid.release.xcconfig"; sourceTree = "<group>"; };
+		BA2CD22267DAB612739E9D49 /* Pods-Touchanoid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Touchanoid.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Touchanoid/Pods-Touchanoid.debug.xcconfig"; sourceTree = "<group>"; };
+		CD52318507ACB30F47199947 /* Pods_Touchanoid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Touchanoid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80D60A81C339268193409569 /* Pods_Touchanoid.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,11 +70,38 @@
 			path = Objects;
 			sourceTree = "<group>";
 		};
+		0B27F8C21E13EA53005D8E07 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				0B27F8C31E13EA53005D8E07 /* Game.json */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		0B4D5AFE1E13D23400A9FBC7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0B27F8C71E13ECD5005D8E07 /* GameManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		0B4D5AFF1E13D23A00A9FBC7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B4D5B001E13D25400A9FBC7 /* Level.swift */,
+				0B27F8C51E13EC11005D8E07 /* GameData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0BCE92F21E06DB0300BC0908 = {
 			isa = PBXGroup;
 			children = (
 				0BCE92FD1E06DB0300BC0908 /* Touchanoid */,
 				0BCE92FC1E06DB0300BC0908 /* Products */,
+				2557723CF1C30085195AE65B /* Pods */,
+				C263C8A0246D0CC3A5FD4B7E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +125,8 @@
 		0BCE93151E06DE7E00BC0908 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0B4D5AFF1E13D23A00A9FBC7 /* Model */,
+				0B4D5AFE1E13D23400A9FBC7 /* Managers */,
 				0BCE932E1E06E43F00BC0908 /* Support */,
 				0BCE93161E06DE7E00BC0908 /* Game */,
 				0BCE93181E06DE7E00BC0908 /* Interface */,
@@ -122,6 +164,7 @@
 		0BCE931C1E06DE7E00BC0908 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0B27F8C21E13EA53005D8E07 /* Levels */,
 				0BCE931D1E06DE7E00BC0908 /* Assets.xcassets */,
 				0BCE931F1E06DE7E00BC0908 /* Scene Data */,
 				0BCE93221E06DE7E00BC0908 /* Storyboards */,
@@ -157,6 +200,23 @@
 			path = Support;
 			sourceTree = "<group>";
 		};
+		2557723CF1C30085195AE65B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA2CD22267DAB612739E9D49 /* Pods-Touchanoid.debug.xcconfig */,
+				3C7EEFB1E41B70EBAFF3E213 /* Pods-Touchanoid.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C263C8A0246D0CC3A5FD4B7E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD52318507ACB30F47199947 /* Pods_Touchanoid.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,9 +224,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0BCE93101E06DB0300BC0908 /* Build configuration list for PBXNativeTarget "Touchanoid" */;
 			buildPhases = (
+				09D40F43DFAC69B74EE4EF71 /* [CP] Check Pods Manifest.lock */,
 				0BCE92F71E06DB0300BC0908 /* Sources */,
 				0BCE92F81E06DB0300BC0908 /* Frameworks */,
 				0BCE92F91E06DB0300BC0908 /* Resources */,
+				7329480B9F409A93AA1AF851 /* [CP] Embed Pods Frameworks */,
+				C30A61A24B9ADF5434746038 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BCE932A1E06DE7E00BC0908 /* GameScene.sks in Resources */,
+				0B27F8C41E13EA53005D8E07 /* Game.json in Resources */,
 				0BCE932B1E06DE7E00BC0908 /* Main.storyboard in Resources */,
 				0BCE93291E06DE7E00BC0908 /* Actions.sks in Resources */,
 				0BCE93271E06DE7E00BC0908 /* Assets.xcassets in Resources */,
@@ -225,6 +289,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		09D40F43DFAC69B74EE4EF71 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7329480B9F409A93AA1AF851 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Touchanoid/Pods-Touchanoid-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C30A61A24B9ADF5434746038 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Touchanoid/Pods-Touchanoid-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0BCE92F71E06DB0300BC0908 /* Sources */ = {
@@ -234,10 +346,13 @@
 				0BCE93301E06E45600BC0908 /* Extensions.swift in Sources */,
 				0B1E2DB31E0998840089706B /* Wall.swift in Sources */,
 				0BCE93261E06DE7E00BC0908 /* AppDelegate.swift in Sources */,
+				0B27F8C81E13ECD5005D8E07 /* GameManager.swift in Sources */,
+				0B4D5B011E13D25400A9FBC7 /* Level.swift in Sources */,
 				0BCE93251E06DE7E00BC0908 /* MainVC.swift in Sources */,
 				0B73FF1D1E09AC660009FAE1 /* Enums.swift in Sources */,
 				0BCE932D1E06E31700BC0908 /* MainWC.swift in Sources */,
 				0B73FF1F1E09ADB00009FAE1 /* Configuration.swift in Sources */,
+				0B27F8C61E13EC11005D8E07 /* GameData.swift in Sources */,
 				0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +452,7 @@
 		};
 		0BCE93111E06DB0300BC0908 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA2CD22267DAB612739E9D49 /* Pods-Touchanoid.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
@@ -352,6 +468,7 @@
 		};
 		0BCE93121E06DB0300BC0908 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C7EEFB1E41B70EBAFF3E213 /* Pods-Touchanoid.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";

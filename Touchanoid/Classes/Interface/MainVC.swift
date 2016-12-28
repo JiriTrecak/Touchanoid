@@ -54,9 +54,10 @@ class MainVC: NSViewController {
             view.ignoresSiblingOrder = true
             view.showsFPS = true
             view.showsNodeCount = true
+            view.showsPhysics = true
+            view.showsFields = true
         }
     }
-    
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Setup
