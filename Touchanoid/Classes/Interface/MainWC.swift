@@ -117,6 +117,8 @@ extension MainWC: NSScrubberDelegate {
     func scrubber(_ scrubber: NSScrubber, didSelectItemAt selectedIndex: Int) {
         
         NSLog("selected")
+        let level = GameManager.sharedInstance.level(index: selectedIndex)
+        MenuManager.sharedInstance.levelChanged(level: level)
     }
     
     func scrubber(_ scrubber: NSScrubber, didHighlightItemAt highlightedIndex: Int) {

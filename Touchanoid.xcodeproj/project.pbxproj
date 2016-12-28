@@ -23,6 +23,8 @@
 		0BCE932B1E06DE7E00BC0908 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BCE93231E06DE7E00BC0908 /* Main.storyboard */; };
 		0BCE932D1E06E31700BC0908 /* MainWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE932C1E06E31700BC0908 /* MainWC.swift */; };
 		0BCE93301E06E45600BC0908 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE932F1E06E45600BC0908 /* Extensions.swift */; };
+		0BDC95D41E1452F20095C405 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDC95D31E1452F20095C405 /* MenuManager.swift */; };
+		0BDC95D71E14535B0095C405 /* ClosureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDC95D61E14535B0095C405 /* ClosureStorage.swift */; };
 		80D60A81C339268193409569 /* Pods_Touchanoid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD52318507ACB30F47199947 /* Pods_Touchanoid.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		0BCE93231E06DE7E00BC0908 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0BCE932C1E06E31700BC0908 /* MainWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWC.swift; sourceTree = "<group>"; };
 		0BCE932F1E06E45600BC0908 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0BDC95D31E1452F20095C405 /* MenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
+		0BDC95D61E14535B0095C405 /* ClosureStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureStorage.swift; sourceTree = "<group>"; };
 		3C7EEFB1E41B70EBAFF3E213 /* Pods-Touchanoid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Touchanoid.release.xcconfig"; path = "Pods/Target Support Files/Pods-Touchanoid/Pods-Touchanoid.release.xcconfig"; sourceTree = "<group>"; };
 		BA2CD22267DAB612739E9D49 /* Pods-Touchanoid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Touchanoid.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Touchanoid/Pods-Touchanoid.debug.xcconfig"; sourceTree = "<group>"; };
 		CD52318507ACB30F47199947 /* Pods_Touchanoid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Touchanoid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				0B27F8C71E13ECD5005D8E07 /* GameManager.swift */,
+				0BDC95D31E1452F20095C405 /* MenuManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -193,11 +198,20 @@
 		0BCE932E1E06E43F00BC0908 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				0BDC95D51E1453500095C405 /* Objects */,
 				0B73FF1C1E09AC660009FAE1 /* Enums.swift */,
 				0BCE932F1E06E45600BC0908 /* Extensions.swift */,
 				0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		0BDC95D51E1453500095C405 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				0BDC95D61E14535B0095C405 /* ClosureStorage.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 		2557723CF1C30085195AE65B /* Pods */ = {
@@ -343,6 +357,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BDC95D71E14535B0095C405 /* ClosureStorage.swift in Sources */,
+				0BDC95D41E1452F20095C405 /* MenuManager.swift in Sources */,
 				0BCE93301E06E45600BC0908 /* Extensions.swift in Sources */,
 				0B1E2DB31E0998840089706B /* Wall.swift in Sources */,
 				0BCE93261E06DE7E00BC0908 /* AppDelegate.swift in Sources */,

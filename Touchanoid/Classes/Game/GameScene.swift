@@ -57,14 +57,24 @@ class GameScene: SKScene {
     
     func configureWithLevel(level: Level) {
         
+        // Pause the game
+        self.gameState = .paused
+        
+        // Remove everything in scene
+        self.removeAllChildren()
+        self.removeAllActions()
+        
+        // Assign new level
         self.currentLevel = level
         
         self.makePrefabs()
-        
         self.generateEdge()
         self.generateGrid()
         self.generatePaddle()
         self.generateBall()
+        
+        // Prepare the game
+        self.gameState = .ready
     }
     
     
@@ -130,18 +140,8 @@ class GameScene: SKScene {
     
     func restartGame() {
         
-        // Pause the game
-        self.gameState = .paused
-        
-        // Remove everything in scene
-        self.removeAllChildren()
-        self.removeAllActions()
-        
         // Configure current level
         self.configureWithLevel(level: GameManager.sharedInstance.randomLevel())
-        
-        // Prepare the game
-        self.gameState = .ready
     }
     
     

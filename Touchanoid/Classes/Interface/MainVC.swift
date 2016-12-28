@@ -32,6 +32,16 @@ class MainVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupObservers()
+        self.setupGameScene()
+    }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Setup
+    
+    func setupGameScene() {
+        
         if let view = self.skView {
             
             // Load the SKScene from 'GameScene.sks'
@@ -57,9 +67,14 @@ class MainVC: NSViewController {
         }
     }
     
-    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-    // MARK: - Setup
     
+    func setupObservers() {
+        
+        // Menu selection of the level
+        MenuManager.sharedInstance.onLevelChangedClosure.addHandler { level in
+            self.scene?.configureWithLevel(level: level)
+        }
+    }
 }
 
 
