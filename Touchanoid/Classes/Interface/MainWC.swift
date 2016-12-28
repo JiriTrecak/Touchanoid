@@ -37,6 +37,7 @@ class MainWC: NSWindowController {
         
         super.windowDidLoad()
         self.setupMainWindow()
+        self.setupObservers()
     }
     
     
@@ -44,8 +45,16 @@ class MainWC: NSWindowController {
     // MARK: - Setup
     
     func setupMainWindow() {
+       
+    }
+    
+    func setupObservers() {
         
-        
+        if #available(OSX 10.12.2, *) {
+            MenuManager.sharedInstance.onMenuStateChangedClosure.addHandler { state in
+                self.touchBar = nil
+            }
+        }
     }
 }
 
@@ -60,7 +69,18 @@ extension MainWC: NSTouchBarDelegate {
         
         let touchBar = NSTouchBar()
         touchBar.delegate = self
-        touchBar.defaultItemIdentifiers = [.levelSelectionItem]
+        
+        // Configure touch bar items based on the current menu state
+        switch MenuManager.sharedInstance.menuState {
+        case .ballSelection:
+            touchBar.defaultItemIdentifiers = [.menuItem]
+        case .paddleSelection:
+            touchBar.defaultItemIdentifiers = [.menuItem]
+        case .levelSelection:
+            touchBar.defaultItemIdentifiers = [.menuItem, .levelSelectionItem]
+        case .main:
+            touchBar.defaultItemIdentifiers = [.ballsItem, .levelsItem, .paddlesItem, .commandPanelItem]
+        }
         
         return touchBar
     }
@@ -73,6 +93,14 @@ extension MainWC: NSTouchBarDelegate {
             return self.createCommandPanelItem()
         case NSTouchBarItemIdentifier.levelSelectionItem:
             return self.createLevelSelectionItem()
+        case NSTouchBarItemIdentifier.menuItem:
+            return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Menu", selector: #selector(MainWC.menuItemSelected))
+        case NSTouchBarItemIdentifier.levelsItem:
+            return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Levels", selector: #selector(MainWC.levelsItemSelected))
+        case NSTouchBarItemIdentifier.ballsItem:
+            return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Balls", selector: #selector(MainWC.ballsItemSelected))
+        case NSTouchBarItemIdentifier.paddlesItem:
+            return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Paddles", selector: #selector(MainWC.paddlesItemSelected))
         default:
             return nil
         }
@@ -82,7 +110,7 @@ extension MainWC: NSTouchBarDelegate {
     func createCommandPanelItem() -> NSTouchBarItem {
         
         let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItemIdentifier.commandPanelItem)
-        customViewItem.view = NSTextField(labelWithString: "My awesome game controls [WIP]")
+        customViewItem.view = NSTextField(labelWithString: "----- game controls go here -----")
         return customViewItem
     }
     
@@ -104,6 +132,38 @@ extension MainWC: NSTouchBarDelegate {
         customViewItem.view = scrubber
         
         return customViewItem
+    }
+    
+    
+    func createDefaultItemWithIdentifier(identifier: NSTouchBarItemIdentifier, text: String, selector: Selector) -> NSTouchBarItem {
+        
+        let item = NSCustomTouchBarItem(identifier: identifier)
+        item.view = NSButton(title: text, target: self, action: selector)
+        return item
+    }
+    
+    
+    func menuItemSelected() {
+        
+        MenuManager.sharedInstance.menuState = .main
+    }
+    
+    
+    func ballsItemSelected() {
+        
+        MenuManager.sharedInstance.menuState = .ballSelection
+    }
+    
+    
+    func levelsItemSelected() {
+        
+        MenuManager.sharedInstance.menuState = .levelSelection
+    }
+    
+    
+    func paddlesItemSelected() {
+        
+        MenuManager.sharedInstance.menuState = .paddleSelection
     }
 }
 

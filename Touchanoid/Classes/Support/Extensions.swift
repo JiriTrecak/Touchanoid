@@ -18,4 +18,9 @@ import AppKit
 extension NSTouchBarItemIdentifier {
     static let commandPanelItem = NSTouchBarItemIdentifier("com.touchanoid.commandPanel")
     static let levelSelectionItem = NSTouchBarItemIdentifier("com.touchanoid.levelSelection")
+    
+    static let menuItem = NSTouchBarItemIdentifier("com.touchanoid.menuItem")
+    static let levelsItem = NSTouchBarItemIdentifier("com.touchanoid.levelsItem")
+    static let ballsItem = NSTouchBarItemIdentifier("com.touchanoid.ballsItem")
+    static let paddlesItem = NSTouchBarItemIdentifier("com.touchanoid.paddlesItem")
 }

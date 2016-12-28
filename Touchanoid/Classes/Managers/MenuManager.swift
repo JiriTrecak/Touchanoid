@@ -17,6 +17,13 @@ import Warp
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 // MARK: - Definitions
 
+enum MenuState {
+    case main
+    case ballSelection
+    case levelSelection
+    case paddleSelection
+}
+
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 // MARK: - Protocols
@@ -34,6 +41,12 @@ public class MenuManager {
     
     // Observers
     let onLevelChangedClosure = ClosureStorage<(Level), ((_ level: Level) -> ())>()
+    let onMenuStateChangedClosure = ClosureStorage<(MenuState), ((_ menuState: MenuState) -> ())>()
+    var menuState: MenuState = .main {
+        didSet {
+            onMenuStateChangedClosure.callAll(parameters: menuState)
+        }
+    }
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
