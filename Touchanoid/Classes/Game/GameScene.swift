@@ -77,6 +77,8 @@ class GameScene: SKScene {
         
         if let ball = ball {
             self.configureWithBall(ball: ball)
+        } else {
+            self.configureWithBall(ball: self.currentBall)
         }
         
         // Prepare the game
@@ -95,7 +97,6 @@ class GameScene: SKScene {
         
         // Setup new particle emitter, if applicable
         if let emitterName = ball.emitterName {
-            
             self.ballEffectNode = SKEmitterNode(fileNamed: emitterName)
             self.ballNode.addChild(self.ballEffectNode)
             self.ballEffectNode.particleLifetime = self.gameState == .playing ? 2 : 0

@@ -17,7 +17,8 @@ import AppKit
 // MARK: - Definitions
 
 let textScrubberItemIdentifier = "com.touchanoid.textScrubberItem"
-let imageScrubberItemIdentifier = "com.touchanoid.imageScrubberItem"
+let ballScrubberItemIdentifier = "com.touchanoid.ballScrubberItem"
+let levelScrubberItemIdentifier = "com.touchanoid.levelScrubberItem"
 
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -73,7 +74,7 @@ extension MainWC: NSTouchBarDelegate {
         // Configure touch bar items based on the current menu state
         switch MenuManager.sharedInstance.menuState {
         case .ballSelection:
-            touchBar.defaultItemIdentifiers = [.menuItem]
+            touchBar.defaultItemIdentifiers = [.menuItem, .ballSelectionItem]
         case .paddleSelection:
             touchBar.defaultItemIdentifiers = [.menuItem]
         case .levelSelection:
@@ -93,6 +94,8 @@ extension MainWC: NSTouchBarDelegate {
             return self.createCommandPanelItem()
         case NSTouchBarItemIdentifier.levelSelectionItem:
             return self.createLevelSelectionItem()
+        case NSTouchBarItemIdentifier.ballSelectionItem:
+            return self.createBallSelectionItem()
         case NSTouchBarItemIdentifier.menuItem:
             return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Menu", selector: #selector(MainWC.menuItemSelected))
         case NSTouchBarItemIdentifier.levelsItem:
@@ -121,7 +124,7 @@ extension MainWC: NSTouchBarDelegate {
         let scrubberFrame = NSRect(x: 0, y: 0, width: 300, height: 30)
         let scrubber = NSScrubber(frame: scrubberFrame)
         scrubber.scrubberLayout = NSScrubberFlowLayout()
-        scrubber.register(NSScrubberImageItemView.self, forItemIdentifier: imageScrubberItemIdentifier)
+        scrubber.register(LevelScrubberItem.self, forItemIdentifier: levelScrubberItemIdentifier)
         scrubber.delegate = self
         scrubber.dataSource = self
         scrubber.mode = .free
@@ -141,7 +144,7 @@ extension MainWC: NSTouchBarDelegate {
         let scrubberFrame = NSRect(x: 0, y: 0, width: 300, height: 30)
         let scrubber = NSScrubber(frame: scrubberFrame)
         scrubber.scrubberLayout = NSScrubberFlowLayout()
-        scrubber.register(NSScrubberImageItemView.self, forItemIdentifier: imageScrubberItemIdentifier)
+        scrubber.register(BallScrubberItem.self, forItemIdentifier: ballScrubberItemIdentifier)
         scrubber.delegate = self
         scrubber.dataSource = self
         scrubber.mode = .free
@@ -213,9 +216,11 @@ extension MainWC: NSScrubberDelegate {
         }
     }
     
+    
     func scrubber(_ scrubber: NSScrubber, didHighlightItemAt highlightedIndex: Int) {
         
     }
+    
     
     func scrubber(_ scrubber: NSScrubber, didChangeVisibleRange visibleRange: NSRange) {
         
@@ -228,18 +233,53 @@ extension MainWC: NSScrubberDataSource {
     
     func numberOfItems(for scrubber: NSScrubber) -> Int {
         
-        return GameManager.sharedInstance.numberOfLevels()
+        switch MenuManager.sharedInstance.menuState {
+            case .ballSelection:
+                return GameManager.sharedInstance.numberOfBalls()
+            case .paddleSelection:
+                return 0
+            case .levelSelection:
+                return GameManager.sharedInstance.numberOfLevels()
+            default:
+                return 0
+        }
     }
     
     func scrubber(_ scrubber: NSScrubber, viewForItemAt index: Int) -> NSScrubberItemView {
         
-        let itemView: NSScrubberImageItemView = scrubber.makeItem(withIdentifier: imageScrubberItemIdentifier, owner: nil) as! NSScrubberImageItemView
-        let level = GameManager.sharedInstance.level(index: index)
-        itemView.imageView.image = level.thumbnail(constrainedToSize: NSSize(width: 50, height: 25))
-        itemView.imageView.imageScaling = .scaleNone
-        itemView.imageView.imageAlignment = .alignCenter
-
-        return itemView;
+        switch MenuManager.sharedInstance.menuState {
+            // Creates dynamic ball preview - SK Scene view with configured ball
+            case .ballSelection:
+                let ball = GameManager.sharedInstance.ball(index: index)
+                return scrubberItemViewFor(ball: ball, scrubber: scrubber)
+            // Creates static paddle preview - thumbnail image
+            case .paddleSelection:
+                return NSScrubberItemView()
+            // Creates static level preview - thumbnail image
+            case .levelSelection:
+                let level = GameManager.sharedInstance.level(index: index)
+                return scrubberItemViewFor(level: level, scrubber: scrubber)
+            default:
+                return NSScrubberItemView()
+        }
+    }
+    
+    
+    func scrubberItemViewFor(ball: Ball, scrubber: NSScrubber) -> NSScrubberItemView {
+        
+        let itemView: BallScrubberItem = scrubber.makeItem(withIdentifier: ballScrubberItemIdentifier, owner: nil) as! BallScrubberItem
+        itemView.configureWith(ball: ball)
+        
+        return itemView
+    }
+    
+    
+    func scrubberItemViewFor(level: Level, scrubber: NSScrubber) -> NSScrubberItemView {
+        
+        let itemView: LevelScrubberItem = scrubber.makeItem(withIdentifier: levelScrubberItemIdentifier, owner: nil) as! LevelScrubberItem
+        itemView.configureWith(level: level)
+        
+        return itemView
     }
 }
 
@@ -249,6 +289,15 @@ extension MainWC: NSScrubberFlowLayoutDelegate {
     
     func scrubber(_ scrubber: NSScrubber, layout: NSScrubberFlowLayout, sizeForItemAt itemIndex: Int) -> NSSize {
         
-        return NSSize(width: 60, height: 30)
+        switch MenuManager.sharedInstance.menuState {
+        case .ballSelection:
+            return NSSize(width: 120, height: 30)
+        case .paddleSelection:
+            return NSSize(width: 120, height: 30)
+        case .levelSelection:
+            return NSSize(width: 60, height: 30)
+        default:
+            return .zero
+        }
     }
 }
