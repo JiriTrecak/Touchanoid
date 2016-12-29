@@ -13,7 +13,6 @@
 		0B27F8C81E13ECD5005D8E07 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B27F8C71E13ECD5005D8E07 /* GameManager.swift */; };
 		0B4D5B011E13D25400A9FBC7 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D5B001E13D25400A9FBC7 /* Level.swift */; };
 		0B6730C81E150C3700A5F721 /* Fireball.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6730C61E150C3700A5F721 /* Fireball.sks */; };
-		0B6730C91E150C3700A5F721 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6730C71E150C3700A5F721 /* spark.png */; };
 		0B6F44551E15120F005CE28F /* Frostbolt.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F44541E15120F005CE28F /* Frostbolt.sks */; };
 		0B6F44571E1514FC005CE28F /* Felfire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F44561E1514FC005CE28F /* Felfire.sks */; };
 		0B6F44591E1515FB005CE28F /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F44581E1515FB005CE28F /* Ball.swift */; };
@@ -23,6 +22,10 @@
 		0B6F44621E152D0A005CE28F /* BallScrubberItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F44611E152D0A005CE28F /* BallScrubberItem.swift */; };
 		0B6F44641E152DE1005CE28F /* PaddleScrubberItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F44631E152DE1005CE28F /* PaddleScrubberItem.swift */; };
 		0B6F44661E15317B005CE28F /* TouchBarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F44651E15317B005CE28F /* TouchBarScene.swift */; };
+		0B6F44681E153679005CE28F /* Arcane.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F44671E153679005CE28F /* Arcane.sks */; };
+		0B6F446B1E153732005CE28F /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F44691E153732005CE28F /* Spark.sks */; };
+		0B6F446C1E153732005CE28F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F446A1E153732005CE28F /* Assets.xcassets */; };
+		0B6F44701E153921005CE28F /* Vapor.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F446F1E153921005CE28F /* Vapor.sks */; };
 		0B73FF1D1E09AC660009FAE1 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1C1E09AC660009FAE1 /* Enums.swift */; };
 		0B73FF1F1E09ADB00009FAE1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */; };
 		0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE93171E06DE7E00BC0908 /* GameScene.swift */; };
@@ -46,7 +49,6 @@
 		0B27F8C71E13ECD5005D8E07 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		0B4D5B001E13D25400A9FBC7 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		0B6730C61E150C3700A5F721 /* Fireball.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fireball.sks; sourceTree = "<group>"; };
-		0B6730C71E150C3700A5F721 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		0B6F44541E15120F005CE28F /* Frostbolt.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Frostbolt.sks; sourceTree = "<group>"; };
 		0B6F44561E1514FC005CE28F /* Felfire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Felfire.sks; sourceTree = "<group>"; };
 		0B6F44581E1515FB005CE28F /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
@@ -56,6 +58,10 @@
 		0B6F44611E152D0A005CE28F /* BallScrubberItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallScrubberItem.swift; sourceTree = "<group>"; };
 		0B6F44631E152DE1005CE28F /* PaddleScrubberItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddleScrubberItem.swift; sourceTree = "<group>"; };
 		0B6F44651E15317B005CE28F /* TouchBarScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchBarScene.swift; sourceTree = "<group>"; };
+		0B6F44671E153679005CE28F /* Arcane.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Arcane.sks; sourceTree = "<group>"; };
+		0B6F44691E153732005CE28F /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
+		0B6F446A1E153732005CE28F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0B6F446F1E153921005CE28F /* Vapor.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Vapor.sks; sourceTree = "<group>"; };
 		0B73FF1C1E09AC660009FAE1 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0BCE92FB1E06DB0300BC0908 /* Touchanoid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touchanoid.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,10 +133,13 @@
 		0B6730C51E150C0300A5F721 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				0B6F44671E153679005CE28F /* Arcane.sks */,
 				0B6F44561E1514FC005CE28F /* Felfire.sks */,
 				0B6F44541E15120F005CE28F /* Frostbolt.sks */,
 				0B6730C61E150C3700A5F721 /* Fireball.sks */,
-				0B6730C71E150C3700A5F721 /* spark.png */,
+				0B6F446F1E153921005CE28F /* Vapor.sks */,
+				0B6F44691E153732005CE28F /* Spark.sks */,
+				0B6F446A1E153732005CE28F /* Assets.xcassets */,
 			);
 			path = Particles;
 			sourceTree = "<group>";
@@ -345,12 +354,15 @@
 			files = (
 				0BCE932A1E06DE7E00BC0908 /* GameScene.sks in Resources */,
 				0B27F8C41E13EA53005D8E07 /* Game.json in Resources */,
+				0B6F44681E153679005CE28F /* Arcane.sks in Resources */,
 				0BCE932B1E06DE7E00BC0908 /* Main.storyboard in Resources */,
 				0B6F44551E15120F005CE28F /* Frostbolt.sks in Resources */,
+				0B6F446B1E153732005CE28F /* Spark.sks in Resources */,
+				0B6F446C1E153732005CE28F /* Assets.xcassets in Resources */,
 				0B6F445D1E151DDA005CE28F /* TouchBarScene.sks in Resources */,
-				0B6730C91E150C3700A5F721 /* spark.png in Resources */,
 				0B6730C81E150C3700A5F721 /* Fireball.sks in Resources */,
 				0B6F44571E1514FC005CE28F /* Felfire.sks in Resources */,
+				0B6F44701E153921005CE28F /* Vapor.sks in Resources */,
 				0BCE93291E06DE7E00BC0908 /* Actions.sks in Resources */,
 				0BCE93271E06DE7E00BC0908 /* Assets.xcassets in Resources */,
 			);
