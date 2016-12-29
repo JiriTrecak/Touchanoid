@@ -1,5 +1,5 @@
 //
-//  GameConfiguration.swift
+//  Ball.swift
 //  Touchanoid
 //
 //  Created by Jiří Třečák on 18.12.16.
@@ -16,14 +16,15 @@ import Warp
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 // MARK: - Object definition
 
-class GameData : WRPObject {
+class Ball : WRPObject {
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Data object properties
     
-    var levels : [Level] = []
-    var balls : [Ball] = []
+    var name : String!
+    var emitterName : String?
+    var textureName : String?
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -32,20 +33,16 @@ class GameData : WRPObject {
     override func propertyMap() -> [WRPProperty] {
         
         return [
-            
+            WRPProperty(remote: "emitterName", bindTo: "emitterName", type: .string, optional: true),
+            WRPProperty(remote: "textureName", bindTo: "textureName", type: .string, optional: true),
+            WRPProperty(remote: "name", bindTo: "name", type: .string),
         ]
     }
-
     
-    override func relationMap() -> [WRPRelation] {
+    
+    override func postInit() {
         
-        return [
-            WRPRelation(remote: "levels", bindTo: "levels", inverseBindTo: nil, modelClass: Level.self, optional: false, relationType: .toMany, inverseRelationType: nil),
-            WRPRelation(remote: "balls", bindTo: "balls", inverseBindTo: nil, modelClass: Ball.self, optional: false, relationType: .toMany, inverseRelationType: nil)
-        ]
     }
 }
-
-
 
 

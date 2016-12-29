@@ -75,7 +75,7 @@ class Level : WRPObject {
                 if let wallType = WallType(rawValue: rawWallType) {
                     let position = CGPoint(x: CGFloat(column) * gridSpacing + CGFloat(column) * blockSize.width,
                                            y: -CGFloat(row + 1) * gridSpacing + size.height - CGFloat(row) * blockSize.height - blockSize.height / 2)
-                    let color = Wall.thumbnailFillColor(ofType: wallType)
+                    let color = GOWall.thumbnailFillColor(ofType: wallType)
                     image.drawRectangle(atPosition: position, size: blockSize, color: color)
                 } else {
                     assertionFailure("Definition of the level contains wrong wall type \(rawWallType). See Wall.swift for allowed types.")
@@ -88,17 +88,5 @@ class Level : WRPObject {
 }
 
 
-extension NSImage {
 
-    func drawRectangle(atPosition position: CGPoint, size: CGSize, color: NSColor) {
-        
-        self.lockFocus()
-        color.setFill()
-        
-        let imageRect = NSRect(origin: position, size: size)
-        NSRectFillUsingOperation(imageRect, .destinationAtop)
-        
-        self.unlockFocus()
-    }
-}
 

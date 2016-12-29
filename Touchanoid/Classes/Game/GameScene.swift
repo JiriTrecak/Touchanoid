@@ -36,6 +36,7 @@ class GameScene: SKScene {
     var gameState: GameState = .ready
     var paddleState: PaddleState = .still
     var currentLevel: Level!
+    var currentBall: Ball!
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -56,7 +57,7 @@ class GameScene: SKScene {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Game setup
     
-    func configureWithLevel(level: Level) {
+    func configureWithLevel(level: Level, ball: Ball?) {
         
         // Pause the game
         self.gameState = .paused
@@ -74,8 +75,32 @@ class GameScene: SKScene {
         self.generatePaddle()
         self.generateBall()
         
+        if let ball = ball {
+            self.configureWithBall(ball: ball)
+        }
+        
         // Prepare the game
         self.gameState = .ready
+    }
+    
+    
+    func configureWithBall(ball: Ball) {
+        
+        self.currentBall = ball
+        
+        // Remove previous particle emitter, if any
+        if self.ballEffectNode != nil {
+            self.ballEffectNode.removeFromParent()
+        }
+        
+        // Setup new particle emitter, if applicable
+        if let emitterName = ball.emitterName {
+            
+            self.ballEffectNode = SKEmitterNode(fileNamed: emitterName)
+            self.ballNode.addChild(self.ballEffectNode)
+            self.ballEffectNode.particleLifetime = self.gameState == .playing ? 2 : 0
+            self.ballEffectNode.targetNode = self
+        }
     }
     
     
@@ -124,11 +149,6 @@ class GameScene: SKScene {
         self.ballNode.physicsBody?.contactTestBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
         self.ballNode.physicsBody?.collisionBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
         self.configureBodyToNotObeyPhysics(body: self.ballNode.physicsBody!, dynamic: true)
-        
-        self.ballEffectNode = SKEmitterNode(fileNamed: "Fireball.sks")
-        self.ballNode.addChild(self.ballEffectNode)
-        self.ballEffectNode.particleLifetime = 0
-        self.ballEffectNode.targetNode = self
     }
     
     
@@ -148,7 +168,7 @@ class GameScene: SKScene {
     func restartGame() {
         
         // Configure current level
-        self.configureWithLevel(level: GameManager.sharedInstance.randomLevel())
+        self.configureWithLevel(level: self.currentLevel, ball: self.currentBall)
     }
     
     
@@ -237,7 +257,7 @@ class GameScene: SKScene {
         }
         
         // Generate wall segment and configure its properties based on the type
-        let wallObject = Wall()
+        let wallObject = GOWall()
         wallObject.configureWithType(type: type)
         
         // Generate the physical object in space
@@ -273,7 +293,7 @@ class GameScene: SKScene {
     }
     
     
-    func configureWall(wall: SKShapeNode, withObject object: Wall) {
+    func configureWall(wall: SKShapeNode, withObject object: GOWall) {
         
         wall.fillColor = object.fillColor()
         wall.strokeColor = object.strokeColor()
@@ -444,7 +464,7 @@ extension GameScene: SKPhysicsContactDelegate {
     
     func contact(wall: SKShapeNode) {
         
-        let wallObject = wall.userData!["storage"] as! Wall
+        let wallObject = wall.userData!["storage"] as! GOWall
         
         // Handle wall collision with ball, remove it from space if it should be removed, otherwise update its state in space
         wallObject.handleBallCollision(shouldRemove: { 

@@ -26,5 +26,15 @@
                }, {
                "name": "1-9",
                "structure": "0, 0, 1, 0, 0, 1, 0, 1 | 3, 2, 0, 3, 3, 0, 2, 3 | 1, 1, 1, 1, 1, 1, 1, 1 | 1, 1, 2, 1, 1, 2, 1, 1 | 9, 9, 1, 0, 0, 1, 9, 9 | 2, 2, 1, 0, 0, 1, 2, 2"
-               }]
+               }],
+    "balls": [{
+    "name": "Frostbolt",
+              "emitterName": "Frostbolt.sks"
+              },{
+              "name": "Fireball",
+              "emitterName": "Fireball.sks"
+              },{
+              "name": "Felfire",
+              "emitterName": "Felfire.sks"
+              }]
 }

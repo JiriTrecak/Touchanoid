@@ -81,6 +81,28 @@ public class GameManager {
         
         return self.gameData.levels[index]
     }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Ball manipulation
+    
+    func randomBall() -> Ball {
+        
+        let index = Int(arc4random_uniform(UInt32(self.gameData.balls.count)))
+        return self.gameData.balls[index]
+    }
+    
+    
+    func numberOfBalls() -> Int {
+        
+        return self.gameData.balls.count
+    }
+    
+    
+    func ball(index: Int) -> Ball {
+        
+        return self.gameData.balls[index]
+    }
 }
 
 

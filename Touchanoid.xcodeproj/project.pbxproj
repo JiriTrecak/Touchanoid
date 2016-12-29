@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B1E2DB31E0998840089706B /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E2DB21E0998840089706B /* Wall.swift */; };
+		0B1E2DB31E0998840089706B /* GOWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1E2DB21E0998840089706B /* GOWall.swift */; };
 		0B27F8C41E13EA53005D8E07 /* Game.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B27F8C31E13EA53005D8E07 /* Game.json */; };
 		0B27F8C61E13EC11005D8E07 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B27F8C51E13EC11005D8E07 /* GameData.swift */; };
 		0B27F8C81E13ECD5005D8E07 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B27F8C71E13ECD5005D8E07 /* GameManager.swift */; };
 		0B4D5B011E13D25400A9FBC7 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4D5B001E13D25400A9FBC7 /* Level.swift */; };
 		0B6730C81E150C3700A5F721 /* Fireball.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6730C61E150C3700A5F721 /* Fireball.sks */; };
 		0B6730C91E150C3700A5F721 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B6730C71E150C3700A5F721 /* spark.png */; };
+		0B6F44551E15120F005CE28F /* Frostbolt.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F44541E15120F005CE28F /* Frostbolt.sks */; };
+		0B6F44571E1514FC005CE28F /* Felfire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F44561E1514FC005CE28F /* Felfire.sks */; };
+		0B6F44591E1515FB005CE28F /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F44581E1515FB005CE28F /* Ball.swift */; };
+		0B6F445B1E151BD3005CE28F /* GOBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6F445A1E151BD3005CE28F /* GOBall.swift */; };
+		0B6F445D1E151DDA005CE28F /* TouchBarScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F445C1E151DDA005CE28F /* TouchBarScene.sks */; };
 		0B73FF1D1E09AC660009FAE1 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1C1E09AC660009FAE1 /* Enums.swift */; };
 		0B73FF1F1E09ADB00009FAE1 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */; };
 		0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE93171E06DE7E00BC0908 /* GameScene.swift */; };
@@ -31,13 +36,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B1E2DB21E0998840089706B /* Wall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
+		0B1E2DB21E0998840089706B /* GOWall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GOWall.swift; sourceTree = "<group>"; };
 		0B27F8C31E13EA53005D8E07 /* Game.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Game.json; sourceTree = "<group>"; };
 		0B27F8C51E13EC11005D8E07 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		0B27F8C71E13ECD5005D8E07 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		0B4D5B001E13D25400A9FBC7 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		0B6730C61E150C3700A5F721 /* Fireball.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fireball.sks; sourceTree = "<group>"; };
 		0B6730C71E150C3700A5F721 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		0B6F44541E15120F005CE28F /* Frostbolt.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Frostbolt.sks; sourceTree = "<group>"; };
+		0B6F44561E1514FC005CE28F /* Felfire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Felfire.sks; sourceTree = "<group>"; };
+		0B6F44581E1515FB005CE28F /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
+		0B6F445A1E151BD3005CE28F /* GOBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GOBall.swift; sourceTree = "<group>"; };
+		0B6F445C1E151DDA005CE28F /* TouchBarScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TouchBarScene.sks; sourceTree = "<group>"; };
 		0B73FF1C1E09AC660009FAE1 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		0B73FF1E1E09ADB00009FAE1 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		0BCE92FB1E06DB0300BC0908 /* Touchanoid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touchanoid.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +83,8 @@
 		0B1E2DB11E0998750089706B /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				0B1E2DB21E0998840089706B /* Wall.swift */,
+				0B6F445A1E151BD3005CE28F /* GOBall.swift */,
+				0B1E2DB21E0998840089706B /* GOWall.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -100,6 +111,7 @@
 			children = (
 				0B4D5B001E13D25400A9FBC7 /* Level.swift */,
 				0B27F8C51E13EC11005D8E07 /* GameData.swift */,
+				0B6F44581E1515FB005CE28F /* Ball.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,10 +119,19 @@
 		0B6730C51E150C0300A5F721 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				0B6F44561E1514FC005CE28F /* Felfire.sks */,
+				0B6F44541E15120F005CE28F /* Frostbolt.sks */,
 				0B6730C61E150C3700A5F721 /* Fireball.sks */,
 				0B6730C71E150C3700A5F721 /* spark.png */,
 			);
 			path = Particles;
+			sourceTree = "<group>";
+		};
+		0B6F445E1E151E0D005CE28F /* Touch Bar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Touch Bar";
 			sourceTree = "<group>";
 		};
 		0BCE92F21E06DB0300BC0908 = {
@@ -165,6 +186,7 @@
 		0BCE93181E06DE7E00BC0908 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				0B6F445E1E151E0D005CE28F /* Touch Bar */,
 				0BCE93191E06DE7E00BC0908 /* MainVC.swift */,
 				0BCE932C1E06E31700BC0908 /* MainWC.swift */,
 			);
@@ -197,6 +219,7 @@
 				0B6730C51E150C0300A5F721 /* Particles */,
 				0BCE93201E06DE7E00BC0908 /* Actions.sks */,
 				0BCE93211E06DE7E00BC0908 /* GameScene.sks */,
+				0B6F445C1E151DDA005CE28F /* TouchBarScene.sks */,
 			);
 			path = "Scene Data";
 			sourceTree = "<group>";
@@ -311,8 +334,11 @@
 				0BCE932A1E06DE7E00BC0908 /* GameScene.sks in Resources */,
 				0B27F8C41E13EA53005D8E07 /* Game.json in Resources */,
 				0BCE932B1E06DE7E00BC0908 /* Main.storyboard in Resources */,
+				0B6F44551E15120F005CE28F /* Frostbolt.sks in Resources */,
+				0B6F445D1E151DDA005CE28F /* TouchBarScene.sks in Resources */,
 				0B6730C91E150C3700A5F721 /* spark.png in Resources */,
 				0B6730C81E150C3700A5F721 /* Fireball.sks in Resources */,
+				0B6F44571E1514FC005CE28F /* Felfire.sks in Resources */,
 				0BCE93291E06DE7E00BC0908 /* Actions.sks in Resources */,
 				0BCE93271E06DE7E00BC0908 /* Assets.xcassets in Resources */,
 			);
@@ -376,7 +402,7 @@
 				0BDC95D71E14535B0095C405 /* ClosureStorage.swift in Sources */,
 				0BDC95D41E1452F20095C405 /* MenuManager.swift in Sources */,
 				0BCE93301E06E45600BC0908 /* Extensions.swift in Sources */,
-				0B1E2DB31E0998840089706B /* Wall.swift in Sources */,
+				0B1E2DB31E0998840089706B /* GOWall.swift in Sources */,
 				0BCE93261E06DE7E00BC0908 /* AppDelegate.swift in Sources */,
 				0B27F8C81E13ECD5005D8E07 /* GameManager.swift in Sources */,
 				0B4D5B011E13D25400A9FBC7 /* Level.swift in Sources */,
@@ -384,7 +410,9 @@
 				0B73FF1D1E09AC660009FAE1 /* Enums.swift in Sources */,
 				0BCE932D1E06E31700BC0908 /* MainWC.swift in Sources */,
 				0B73FF1F1E09ADB00009FAE1 /* Configuration.swift in Sources */,
+				0B6F445B1E151BD3005CE28F /* GOBall.swift in Sources */,
 				0B27F8C61E13EC11005D8E07 /* GameData.swift in Sources */,
+				0B6F44591E1515FB005CE28F /* Ball.swift in Sources */,
 				0BCE93241E06DE7E00BC0908 /* GameScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +514,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BA2CD22267DAB612739E9D49 /* Pods-Touchanoid.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -502,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3C7EEFB1E41B70EBAFF3E213 /* Pods-Touchanoid.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;

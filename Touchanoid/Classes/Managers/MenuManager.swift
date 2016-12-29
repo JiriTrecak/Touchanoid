@@ -41,7 +41,10 @@ public class MenuManager {
     
     // Observers
     let onLevelChangedClosure = ClosureStorage<(Level), ((_ level: Level) -> ())>()
+    let onBallChangedClosure = ClosureStorage<(Ball), ((_ ball: Ball) -> ())>()
     let onMenuStateChangedClosure = ClosureStorage<(MenuState), ((_ menuState: MenuState) -> ())>()
+    
+    // Game state
     var menuState: MenuState = .main {
         didSet {
             onMenuStateChangedClosure.callAll(parameters: menuState)
@@ -64,6 +67,13 @@ public class MenuManager {
         
         // Notify all interested in level change
         self.onLevelChangedClosure.callAll(parameters: level)
+    }
+    
+    
+    func ballChanged(ball: Ball) {
+        
+        // Notify all interested in level change
+        self.onBallChangedClosure.callAll(parameters: ball)
     }
 }
 

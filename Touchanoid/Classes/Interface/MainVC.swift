@@ -57,7 +57,9 @@ class MainVC: NSViewController {
                 view.presentScene(scene)
                 
                 // Setup current level
-                self.scene?.configureWithLevel(level: GameManager.sharedInstance.randomLevel())
+                let level = GameManager.sharedInstance.randomLevel()
+                let ball = GameManager.sharedInstance.randomBall()
+                self.scene?.configureWithLevel(level: level, ball: ball)
             }
             
             // Configure the SK view debug information
@@ -72,7 +74,12 @@ class MainVC: NSViewController {
         
         // Menu selection of the level
         MenuManager.sharedInstance.onLevelChangedClosure.addHandler { level in
-            self.scene?.configureWithLevel(level: level)
+            self.scene?.configureWithLevel(level: level, ball: nil)
+        }
+        
+        // Menu selection of the ball
+        MenuManager.sharedInstance.onBallChangedClosure.addHandler { ball in
+            self.scene?.configureWithBall(ball: ball)
         }
     }
 }

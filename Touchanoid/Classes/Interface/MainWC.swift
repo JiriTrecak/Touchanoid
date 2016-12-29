@@ -36,7 +36,6 @@ class MainWC: NSWindowController {
     override func windowDidLoad() {
         
         super.windowDidLoad()
-        self.setupMainWindow()
         self.setupObservers()
     }
     
@@ -44,12 +43,9 @@ class MainWC: NSWindowController {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Setup
     
-    func setupMainWindow() {
-       
-    }
-    
     func setupObservers() {
         
+        // When menu state changes, invalidate current touchbar, effectively forcing system to re-render it with new configuration
         if #available(OSX 10.12.2, *) {
             MenuManager.sharedInstance.onMenuStateChangedClosure.addHandler { state in
                 self.touchBar = nil
@@ -64,6 +60,10 @@ class MainWC: NSWindowController {
 
 @available(OSX 10.12.2, *)
 extension MainWC: NSTouchBarDelegate {
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Item creation
     
     override func makeTouchBar() -> NSTouchBar? {
         
@@ -135,6 +135,26 @@ extension MainWC: NSTouchBarDelegate {
     }
     
     
+    func createBallSelectionItem()  -> NSTouchBarItem {
+        
+        let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItemIdentifier.ballSelectionItem)
+        let scrubberFrame = NSRect(x: 0, y: 0, width: 300, height: 30)
+        let scrubber = NSScrubber(frame: scrubberFrame)
+        scrubber.scrubberLayout = NSScrubberFlowLayout()
+        scrubber.register(NSScrubberImageItemView.self, forItemIdentifier: imageScrubberItemIdentifier)
+        scrubber.delegate = self
+        scrubber.dataSource = self
+        scrubber.mode = .free
+        scrubber.showsArrowButtons = false
+        scrubber.selectionOverlayStyle = nil
+        scrubber.selectionBackgroundStyle = NSScrubberSelectionStyle.roundedBackground
+        scrubber.backgroundColor = NSColor.clear
+        customViewItem.view = scrubber
+        
+        return customViewItem
+    }
+    
+    
     func createDefaultItemWithIdentifier(identifier: NSTouchBarItemIdentifier, text: String, selector: Selector) -> NSTouchBarItem {
         
         let item = NSCustomTouchBarItem(identifier: identifier)
@@ -142,6 +162,9 @@ extension MainWC: NSTouchBarDelegate {
         return item
     }
     
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Actions
     
     func menuItemSelected() {
         
@@ -176,9 +199,18 @@ extension MainWC: NSScrubberDelegate {
     
     func scrubber(_ scrubber: NSScrubber, didSelectItemAt selectedIndex: Int) {
         
-        NSLog("selected")
-        let level = GameManager.sharedInstance.level(index: selectedIndex)
-        MenuManager.sharedInstance.levelChanged(level: level)
+        switch MenuManager.sharedInstance.menuState {
+            // Changes current level
+            case .levelSelection:
+                let level = GameManager.sharedInstance.level(index: selectedIndex)
+                MenuManager.sharedInstance.levelChanged(level: level)
+            // Changes current ball
+            case .ballSelection:
+                let ball = GameManager.sharedInstance.ball(index: selectedIndex)
+                MenuManager.sharedInstance.ballChanged(ball: ball)
+            default:
+                break
+        }
     }
     
     func scrubber(_ scrubber: NSScrubber, didHighlightItemAt highlightedIndex: Int) {
