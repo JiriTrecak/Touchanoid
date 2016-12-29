@@ -42,7 +42,8 @@ class BallScrubberItem: NSScrubberItemView {
     func configureWith(ball: Ball) {
         
         // Create view and the scene
-        self.skView = SKView(frame: NSRect(x: 2, y: 0, width: 116, height: 30))
+        let width = ball.emitterName != nil ? 116 : 56
+        self.skView = SKView(frame: NSRect(x: 2, y: 0, width: width, height: 30))
         
         // Load the SKScene from 'GameScene.sks'
         if let scene = SKScene(fileNamed: "TouchBarScene.sks") {
@@ -72,9 +73,14 @@ class BallScrubberItem: NSScrubberItemView {
     
     func generateBallPreviewNodeInto(scene: SKScene, ball: Ball) {
         
-        self.ballNode = SKSpriteNode(color: NSColor.clear, size: CGSize(width: 20, height: 20))
+        if let textureName = ball.textureName {
+            self.ballNode = SKSpriteNode(imageNamed: textureName)
+            self.ballNode.position = CGPoint(x: 0, y: 0)
+        } else {
+            self.ballNode = SKSpriteNode(color: NSColor.clear, size: CGSize(width: 20, height: 20))
+            self.ballNode.position = CGPoint(x: 30, y: 0)
+        }
         self.ballNode.name = "ball"
-        self.ballNode.position = CGPoint(x: 30, y: 0)
         scene.addChild(self.ballNode)
         
         // Setup new particle emitter, if applicable

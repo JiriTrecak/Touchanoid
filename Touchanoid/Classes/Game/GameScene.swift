@@ -102,6 +102,13 @@ class GameScene: SKScene {
             self.ballEffectNode.particleLifetime = self.gameState == .playing ? 2 : 0
             self.ballEffectNode.targetNode = self
         }
+        
+        if let textureName = ball.textureName {
+            let texture = SKTexture(imageNamed: textureName)
+            self.ballNode.texture = texture
+        } else {
+            self.ballNode.texture = nil
+        }
     }
     
     
@@ -221,11 +228,13 @@ class GameScene: SKScene {
     
     func updateBallEmitter() {
         
-        // Calculate angle from the vector
-        let vector = self.ballNode.physicsBody!.velocity
-        let angle = atan2(vector.dy, vector.dx)
-        
-        self.ballEffectNode.emissionAngle = angle
+        // Calculate angle for particle emitter from the vector
+        if self.ballEffectNode != nil {
+            let vector = self.ballNode.physicsBody!.velocity
+            let angle = atan2(vector.dy, vector.dx)
+            
+            self.ballEffectNode.emissionAngle = angle
+        }
     }
     
     
@@ -306,9 +315,10 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
-        // Update paddle position to always stay on Y axis
+        // Update paddle position to always stay on Y axis, and reset any Y velocity
         if self.gameState == .playing {
             self.paddleNode.position = CGPoint(x: self.paddleNode.position.x, y: GameConfiguration.paddleStartingPosition.y)
+            self.paddleNode.physicsBody!.velocity = CGVector(dx: self.paddleNode.physicsBody!.velocity.dx, dy: 0.0)
         }
         
         // Called before each frame is rendered

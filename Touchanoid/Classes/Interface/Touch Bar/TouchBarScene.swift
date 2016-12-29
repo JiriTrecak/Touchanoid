@@ -48,6 +48,7 @@ class TouchBarScene: SKScene {
         
         self.view?.showsFPS = false
         self.view?.showsNodeCount = false
+        self.isUserInteractionEnabled = false
         
         self.physicsWorld.gravity = CGVector.zero
     }

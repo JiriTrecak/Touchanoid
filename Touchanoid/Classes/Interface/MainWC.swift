@@ -291,7 +291,8 @@ extension MainWC: NSScrubberFlowLayoutDelegate {
         
         switch MenuManager.sharedInstance.menuState {
         case .ballSelection:
-            return NSSize(width: 120, height: 30)
+            let ball = GameManager.sharedInstance.ball(index: itemIndex)
+            return NSSize(width: ball.emitterName != nil ? 120 : 60, height: 30)
         case .paddleSelection:
             return NSSize(width: 120, height: 30)
         case .levelSelection:
