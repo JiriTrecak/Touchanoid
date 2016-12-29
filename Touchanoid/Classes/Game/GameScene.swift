@@ -28,6 +28,7 @@ class GameScene: SKScene {
     // World prefabs and objects
     var wallPrefab: SKShapeNode!
     var ballNode: SKSpriteNode!
+    var ballEffectNode: SKEmitterNode!
     var edgeNode: SKShapeNode!
     var paddleNode: SKShapeNode!
     
@@ -113,7 +114,7 @@ class GameScene: SKScene {
     
     func generateBall() {
         
-        self.ballNode = SKSpriteNode(imageNamed: "ball")
+        self.ballNode = SKSpriteNode(color: NSColor.clear, size: CGSize(width: 20, height: 20))
         self.ballNode.name = "ball"
         self.ballNode.position = CGPoint(x: 0, y: -300)
         self.addChild(self.ballNode)
@@ -123,6 +124,11 @@ class GameScene: SKScene {
         self.ballNode.physicsBody?.contactTestBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
         self.ballNode.physicsBody?.collisionBitMask = CollisionCategory.Wall | CollisionCategory.Edge | CollisionCategory.Paddle
         self.configureBodyToNotObeyPhysics(body: self.ballNode.physicsBody!, dynamic: true)
+        
+        self.ballEffectNode = SKEmitterNode(fileNamed: "Fireball.sks")
+        self.ballNode.addChild(self.ballEffectNode)
+        self.ballEffectNode.particleLifetime = 0
+        self.ballEffectNode.targetNode = self
     }
     
     
@@ -134,6 +140,7 @@ class GameScene: SKScene {
         if self.gameState == .ready {
             self.gameState = .playing
             self.ballNode.physicsBody?.applyImpulse(GameConfiguration.initialBallSpeed)
+            self.ballEffectNode.particleLifetime = 2
         }
     }
     
@@ -188,6 +195,16 @@ class GameScene: SKScene {
         body.linearDamping = 0
         body.allowsRotation = false
         body.isDynamic = dynamic
+    }
+    
+    
+    func updateBallEmitter() {
+        
+        // Calculate angle from the vector
+        let vector = self.ballNode.physicsBody!.velocity
+        let angle = atan2(vector.dy, vector.dx)
+        
+        self.ballEffectNode.emissionAngle = angle
     }
     
     
@@ -415,6 +432,8 @@ extension GameScene: SKPhysicsContactDelegate {
         } else {
             NSLog("different collision")
         }
+        
+        self.updateBallEmitter()
     }
     
     
