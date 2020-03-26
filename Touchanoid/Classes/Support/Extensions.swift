@@ -10,20 +10,21 @@
 // MARK: - Import
 
 import AppKit
+import Cocoa
 
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 // MARK: - Extension - Touch Bar
 
-extension NSTouchBarItemIdentifier {
-    static let commandPanelItem = NSTouchBarItemIdentifier("com.touchanoid.commandPanel")
-    static let levelSelectionItem = NSTouchBarItemIdentifier("com.touchanoid.levelSelection")
-    static let ballSelectionItem = NSTouchBarItemIdentifier("com.touchanoid.ballSelection")
+extension NSTouchBarItem.Identifier {
+    static let commandPanelItem = NSTouchBarItem.Identifier("com.touchanoid.commandPanel")
+    static let levelSelectionItem = NSTouchBarItem.Identifier("com.touchanoid.levelSelection")
+    static let ballSelectionItem = NSTouchBarItem.Identifier("com.touchanoid.ballSelection")
     
-    static let menuItem = NSTouchBarItemIdentifier("com.touchanoid.menuItem")
-    static let levelsItem = NSTouchBarItemIdentifier("com.touchanoid.levelsItem")
-    static let ballsItem = NSTouchBarItemIdentifier("com.touchanoid.ballsItem")
-    static let paddlesItem = NSTouchBarItemIdentifier("com.touchanoid.paddlesItem")
+    static let menuItem = NSTouchBarItem.Identifier("com.touchanoid.menuItem")
+    static let levelsItem = NSTouchBarItem.Identifier("com.touchanoid.levelsItem")
+    static let ballsItem = NSTouchBarItem.Identifier("com.touchanoid.ballsItem")
+    static let paddlesItem = NSTouchBarItem.Identifier("com.touchanoid.paddlesItem")
 }
 
 
@@ -38,7 +39,7 @@ extension NSImage {
         color.setFill()
         
         let imageRect = NSRect(origin: position, size: size)
-        NSRectFillUsingOperation(imageRect, .destinationAtop)
+        imageRect.fill(using: .destinationAtop)
         
         self.unlockFocus()
     }

@@ -1,7 +1,7 @@
 //
-// WRPEnums.swift
+// WRPProtocols.swift
 //
-// Copyright (c) 2016 Jiri Trecak (http://jiritrecak.com/)
+// Copyright (c) 2018 Jiri Trecak (http://jiritrecak.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,38 +30,14 @@ import Foundation
 
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-//MARK: - Enums
+//MARK: - Protocols
 
-public enum WRPPropertyType {
-    case string
-    case number
-    case bool
-    case int
-    case double
-    case float
-    case date
-    case array
-    case dictionary
-    case data
-    case option
-    case uuid
+public protocol WRPCodableEnum: RawRepresentable {
+    func valueAsAny() -> Any
 }
 
-enum WRPPropertyAssignement {
-    case int
-    case double
-    case float
-    case any
-    case option
+public extension WRPCodableEnum where Self: RawRepresentable {
+    func valueAsAny() -> Any {
+        return rawValue as Any
+    }
 }
-
-public enum WRPRelationType {
-    case toOne
-    case toMany
-}
-
-public enum WRPSerializationOption {
-    case none
-    case includeNullProperties
-}
-

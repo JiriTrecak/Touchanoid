@@ -87,22 +87,22 @@ extension MainWC: NSTouchBarDelegate {
     }
     
     
-    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItemIdentifier) -> NSTouchBarItem? {
+    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
         
         switch identifier {
-        case NSTouchBarItemIdentifier.commandPanelItem:
+        case NSTouchBarItem.Identifier.commandPanelItem:
             return self.createCommandPanelItem()
-        case NSTouchBarItemIdentifier.levelSelectionItem:
+        case NSTouchBarItem.Identifier.levelSelectionItem:
             return self.createLevelSelectionItem()
-        case NSTouchBarItemIdentifier.ballSelectionItem:
+        case NSTouchBarItem.Identifier.ballSelectionItem:
             return self.createBallSelectionItem()
-        case NSTouchBarItemIdentifier.menuItem:
+        case NSTouchBarItem.Identifier.menuItem:
             return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Menu", selector: #selector(MainWC.menuItemSelected))
-        case NSTouchBarItemIdentifier.levelsItem:
+        case NSTouchBarItem.Identifier.levelsItem:
             return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Levels", selector: #selector(MainWC.levelsItemSelected))
-        case NSTouchBarItemIdentifier.ballsItem:
+        case NSTouchBarItem.Identifier.ballsItem:
             return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Balls", selector: #selector(MainWC.ballsItemSelected))
-        case NSTouchBarItemIdentifier.paddlesItem:
+        case NSTouchBarItem.Identifier.paddlesItem:
             return self.createDefaultItemWithIdentifier(identifier: identifier, text: "Paddles", selector: #selector(MainWC.paddlesItemSelected))
         default:
             return nil
@@ -112,7 +112,7 @@ extension MainWC: NSTouchBarDelegate {
     
     func createCommandPanelItem() -> NSTouchBarItem {
         
-        let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItemIdentifier.commandPanelItem)
+        let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItem.Identifier.commandPanelItem)
         customViewItem.view = NSTextField(labelWithString: "----- game controls go here -----")
         return customViewItem
     }
@@ -120,11 +120,11 @@ extension MainWC: NSTouchBarDelegate {
     
     func createLevelSelectionItem()  -> NSTouchBarItem {
         
-        let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItemIdentifier.levelSelectionItem)
+        let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItem.Identifier.levelSelectionItem)
         let scrubberFrame = NSRect(x: 0, y: 0, width: 300, height: 30)
         let scrubber = NSScrubber(frame: scrubberFrame)
         scrubber.scrubberLayout = NSScrubberFlowLayout()
-        scrubber.register(LevelScrubberItem.self, forItemIdentifier: levelScrubberItemIdentifier)
+        scrubber.register(LevelScrubberItem.self, forItemIdentifier: NSUserInterfaceItemIdentifier(rawValue: levelScrubberItemIdentifier))
         scrubber.delegate = self
         scrubber.dataSource = self
         scrubber.mode = .free
@@ -140,11 +140,11 @@ extension MainWC: NSTouchBarDelegate {
     
     func createBallSelectionItem()  -> NSTouchBarItem {
         
-        let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItemIdentifier.ballSelectionItem)
+        let customViewItem = NSCustomTouchBarItem(identifier: NSTouchBarItem.Identifier.ballSelectionItem)
         let scrubberFrame = NSRect(x: 0, y: 0, width: 300, height: 30)
         let scrubber = NSScrubber(frame: scrubberFrame)
         scrubber.scrubberLayout = NSScrubberFlowLayout()
-        scrubber.register(BallScrubberItem.self, forItemIdentifier: ballScrubberItemIdentifier)
+        scrubber.register(BallScrubberItem.self, forItemIdentifier: NSUserInterfaceItemIdentifier(rawValue: ballScrubberItemIdentifier))
         scrubber.delegate = self
         scrubber.dataSource = self
         scrubber.mode = .free
@@ -158,7 +158,7 @@ extension MainWC: NSTouchBarDelegate {
     }
     
     
-    func createDefaultItemWithIdentifier(identifier: NSTouchBarItemIdentifier, text: String, selector: Selector) -> NSTouchBarItem {
+    func createDefaultItemWithIdentifier(identifier: NSTouchBarItem.Identifier, text: String, selector: Selector) -> NSTouchBarItem {
         
         let item = NSCustomTouchBarItem(identifier: identifier)
         item.view = NSButton(title: text, target: self, action: selector)
@@ -169,25 +169,25 @@ extension MainWC: NSTouchBarDelegate {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Actions
     
-    func menuItemSelected() {
+    @objc func menuItemSelected() {
         
         MenuManager.sharedInstance.menuState = .main
     }
     
     
-    func ballsItemSelected() {
+    @objc func ballsItemSelected() {
         
         MenuManager.sharedInstance.menuState = .ballSelection
     }
     
     
-    func levelsItemSelected() {
+    @objc func levelsItemSelected() {
         
         MenuManager.sharedInstance.menuState = .levelSelection
     }
     
     
-    func paddlesItemSelected() {
+    @objc func paddlesItemSelected() {
         
         MenuManager.sharedInstance.menuState = .paddleSelection
     }
@@ -267,7 +267,7 @@ extension MainWC: NSScrubberDataSource {
     
     func scrubberItemViewFor(ball: Ball, scrubber: NSScrubber) -> NSScrubberItemView {
         
-        let itemView: BallScrubberItem = scrubber.makeItem(withIdentifier: ballScrubberItemIdentifier, owner: nil) as! BallScrubberItem
+        let itemView: BallScrubberItem = scrubber.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: ballScrubberItemIdentifier), owner: nil) as! BallScrubberItem
         itemView.configureWith(ball: ball)
         
         return itemView
@@ -276,7 +276,7 @@ extension MainWC: NSScrubberDataSource {
     
     func scrubberItemViewFor(level: Level, scrubber: NSScrubber) -> NSScrubberItemView {
         
-        let itemView: LevelScrubberItem = scrubber.makeItem(withIdentifier: levelScrubberItemIdentifier, owner: nil) as! LevelScrubberItem
+        let itemView: LevelScrubberItem = scrubber.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: levelScrubberItemIdentifier), owner: nil) as! LevelScrubberItem
         itemView.configureWith(level: level)
         
         return itemView

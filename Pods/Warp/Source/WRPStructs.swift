@@ -32,21 +32,59 @@ import Foundation
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 //MARK: - Structures
 
-public struct WRPProperty {
+public class WRPEnumProperty<T: WRPCodableEnum>: WRPProperty {
+    
+    var enumType: T.Type? = nil
+    var enumPointer: UnsafeMutablePointer<T>!
+    
+    public init(remote: String, bindTo: inout T, optional : Bool) {
+    
+        super.init(remote: remote, bindTo: "", type: .option, optional: optional)
+        self.enumType = T.self
+        withUnsafeMutablePointer(to: &bindTo) { (pointer) in
+            self.enumPointer = pointer
+        }
+    }
+    
+    public override func assignValueToBoundProperty(fromValue: Any) {
+        
+        guard let value = self.enumType?.init(rawValue: fromValue as! T.RawValue) else {
+            assertionFailure("Cannot initialize enum of key \(self.masterRemoteName) for value \(fromValue)")
+            return
+        }
+        
+        self.enumPointer.initialize(to: value)
+    }
+    
+    
+    public override func valueOfBoundProperty() -> Any? {
+        
+        return self.enumPointer.pointee.rawValue
+    }
+    
+    
+    public override var hasBoundValue: Bool {
+        return true
+    }
+}
+
+
+public class WRPProperty {
     
     // All remote names that can be used as source of property content
-    var remoteNames : [String]
+    var remoteNames: [String]
     
     // Remote name that will be used for rebuilding of the value
-    var masterRemoteName : String
+    var masterRemoteName: String
     
     // Local property name
-    var localName : String
+    var localName: String
     
     // Data type of the property
-    var elementDataType : WRPPropertyType
-    var optional : Bool = true
-    var format : String?
+    var elementDataType: WRPPropertyType
+    var optional: Bool = true
+    var format: String?
+    
     
     public init(remote : String, bindTo : String, type : WRPPropertyType) {
         
@@ -55,6 +93,7 @@ public struct WRPProperty {
         self.localName = bindTo
         self.elementDataType = type
     }
+    
     
     public init(remote : String, type : WRPPropertyType) {
         
@@ -125,6 +164,21 @@ public struct WRPProperty {
         if self.remoteNames.count == 0 {
             self.remoteNames.append(self.masterRemoteName)
         }
+    }
+    
+    
+    public func assignValueToBoundProperty(fromValue: Any) {
+        assertionFailure("Direct assign within pure property cannot be used")
+    }
+    
+    
+    public func valueOfBoundProperty() -> Any? {
+        assertionFailure("Direct read from the pure property cannot be used")
+        return nil
+    }
+    
+    public var hasBoundValue: Bool {
+        return false
     }
 }
 

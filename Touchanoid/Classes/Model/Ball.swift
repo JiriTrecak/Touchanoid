@@ -22,9 +22,9 @@ class Ball : WRPObject {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Data object properties
     
-    var name : String!
-    var emitterName : String?
-    var textureName : String?
+    @objc dynamic var name : String!
+    @objc dynamic var emitterName : String?
+    @objc dynamic var textureName : String?
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---

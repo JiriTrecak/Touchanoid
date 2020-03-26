@@ -22,8 +22,8 @@ class Level : WRPObject {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Data object properties
     
-    var name : String!
-    var structure : String!
+    @objc dynamic var name : String!
+    @objc dynamic var structure : String!
     var levelDefinition: [[Int]] = []
     
     

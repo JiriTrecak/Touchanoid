@@ -358,7 +358,7 @@ class GameScene: SKScene {
     
     public func handleKeyEvent(event: NSEvent, keyDown: Bool) {
         
-        if event.modifierFlags.contains(NSEventModifierFlags.numericPad) {
+        if event.modifierFlags.contains(NSEvent.ModifierFlags.numericPad) {
             if let theArrow = event.charactersIgnoringModifiers, let keyChar = theArrow.unicodeScalars.first?.value {
                 switch Int(keyChar){
                     case NSRightArrowFunctionKey:
@@ -372,7 +372,7 @@ class GameScene: SKScene {
                 }
             }
         } else if let characters = event.characters, keyDown {
-            for character in characters.characters{
+            for character in characters {
                 switch character {
                     case " ":
                         self.handleSpace()

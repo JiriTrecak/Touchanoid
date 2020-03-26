@@ -7,201 +7,221 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E78444642F35419ACF80625745F5C73 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DD1219F1E6CF00379D39F252D87C6 /* Cocoa.framework */; };
-		31C283F8BA4B7E8F51420E2DDB0DED29 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270DD1219F1E6CF00379D39F252D87C6 /* Cocoa.framework */; };
-		782CB128A4C51623E2D09A7EE006EE93 /* Pods-Touchanoid-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D9500184BB888C444D955AEAACA85E /* Pods-Touchanoid-dummy.m */; };
-		9226754139DDF5CF0166F17CD3908A9F /* WRPStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDEB9EE80659BF0F375E821D0986463 /* WRPStructs.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		9C3980CE3685C94F2850625F595113A7 /* Warp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E78E5F46E486B479E0FB88602B407EC /* Warp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B2FE252082A7EFA49BB1E7CE09AFB16B /* WRPEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF20B7C852C511F2A8C9A2C8EABF775 /* WRPEnums.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E51AA421EA1569456EC9BBEF714E3F20 /* WRPObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F871C62B7FBD5139ACAD3715C0E6C1E /* WRPObject.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		E663A8C8965E918646C26B887C16EACB /* WRPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AB9BD44106F755B8B200ED8F3FA48B /* WRPExtensions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		FC3A8D187EB5AB5D337E40C3BE147ABC /* Pods-Touchanoid-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F4AA7AB90D3C1465C9480BA8DE00FF6E /* Pods-Touchanoid-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FDB6C37ADA0EDCEE3B6BE003EBAC9F9D /* Warp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F91E485B089DF997A804E7AF47E3A8C /* Warp-dummy.m */; };
+		25FD106CB6E633F7124D8DFADB0581A4 /* WRPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8250871113A756587AA762776CB6126 /* WRPExtensions.swift */; };
+		44594CA0A97CB702D2616FA955A0B3D4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
+		5E6AB1A6F98E99D005CEA07CFA616DB1 /* WRPObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E582502AF2D7E818B3C0A404DEE5D5 /* WRPObject.swift */; };
+		68175BCF96FCE8F11E283DE99FC02A8E /* WRPStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462C4D02135B4DA6BC649B82019E016D /* WRPStructs.swift */; };
+		99ADE5B61F33277EA5255AFC220EF98C /* WRPEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE33391B54E6E72D4B59FF7A7A4B9C /* WRPEnums.swift */; };
+		9C53CF93DCED19DA6472D0C709101E5A /* Warp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAC0EC5426E87E2EA9A46446553A03A /* Warp-dummy.m */; };
+		A69F13DBED18F3F66584574D93965682 /* Pods-Touchanoid-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 21C9E99E9CC5C4C67FB4F2CCAF21C912 /* Pods-Touchanoid-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B04F735A2940CD45E945010EC1897491 /* Warp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1583ADE8D7D672969F4DF1FD23D08D /* Warp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D9B1306619F55356D5AE5601FE6FA704 /* WRPProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8084EFEC576C08960D9BDFDA2B206D /* WRPProtocols.swift */; };
+		E582018BC8F3E9ADA44DE29CE4E64019 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */; };
+		EF6B162A571D9E704794D2CE4852BDAF /* Pods-Touchanoid-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ACEA0B29B43C16679D6C43678581F1 /* Pods-Touchanoid-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		738F4A693D1AC40DBD94877BCFE73871 /* PBXContainerItemProxy */ = {
+		B6D646474FD99F5CD865B99F8835567C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 51ACA31133ECC9D64BE804B0C1D1D67C;
+			remoteGlobalIDString = F8772A9E4C3E446123ACE0CE0881319B;
 			remoteInfo = Warp;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0AD9E4310D1BCC0E92A2E746ED452291 /* Warp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Warp.modulemap; sourceTree = "<group>"; };
-		0E066DDE7707C5DC4256D43BB73EBBF9 /* Pods-Touchanoid-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Touchanoid-frameworks.sh"; sourceTree = "<group>"; };
-		1E6DA5AA5ECFA19B63359152A8E26273 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		20B62E287D141BB58CBD5C0CD88465EF /* Warp-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Warp-prefix.pch"; sourceTree = "<group>"; };
-		247E066D4DED5F6E214559151C6FD218 /* Pods-Touchanoid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Touchanoid.debug.xcconfig"; sourceTree = "<group>"; };
-		270DD1219F1E6CF00379D39F252D87C6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		296E17F0807BFA732E6261491E398537 /* Warp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Warp.framework; path = Warp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CDEB9EE80659BF0F375E821D0986463 /* WRPStructs.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPStructs.swift; path = Source/WRPStructs.swift; sourceTree = "<group>"; };
-		2F91E485B089DF997A804E7AF47E3A8C /* Warp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Warp-dummy.m"; sourceTree = "<group>"; };
-		43EF190382CF98C5BB2696D346FAEAF0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		52AB9BD44106F755B8B200ED8F3FA48B /* WRPExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPExtensions.swift; path = Source/WRPExtensions.swift; sourceTree = "<group>"; };
-		54B6A048291B4C9C57790B8A24997911 /* Pods-Touchanoid.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Touchanoid.modulemap"; sourceTree = "<group>"; };
-		6E78E5F46E486B479E0FB88602B407EC /* Warp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Warp-umbrella.h"; sourceTree = "<group>"; };
-		7EF20B7C852C511F2A8C9A2C8EABF775 /* WRPEnums.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPEnums.swift; path = Source/WRPEnums.swift; sourceTree = "<group>"; };
-		7F871C62B7FBD5139ACAD3715C0E6C1E /* WRPObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPObject.swift; path = Source/WRPObject.swift; sourceTree = "<group>"; };
-		8F661E7A5586E8AF3179F6297692BF99 /* Pods-Touchanoid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Touchanoid.release.xcconfig"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A1D9500184BB888C444D955AEAACA85E /* Pods-Touchanoid-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Touchanoid-dummy.m"; sourceTree = "<group>"; };
-		C10ED9D61276CCDDCA4F4F7E50E70EDD /* Pods-Touchanoid-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Touchanoid-acknowledgements.plist"; sourceTree = "<group>"; };
-		DED0ABFE51BA0CDE691ABCF9C287B9CB /* Pods-Touchanoid-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Touchanoid-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E9A3DD6DBD0FA54929C2B2992BF952B7 /* Pods_Touchanoid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Touchanoid.framework; path = "Pods-Touchanoid.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4AA7AB90D3C1465C9480BA8DE00FF6E /* Pods-Touchanoid-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Touchanoid-umbrella.h"; sourceTree = "<group>"; };
-		F8F55ED23867298D509BC00EA279B548 /* Pods-Touchanoid-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Touchanoid-resources.sh"; sourceTree = "<group>"; };
-		FE78DFF7387E26943C2C14A308E7A26F /* Warp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Warp.xcconfig; sourceTree = "<group>"; };
+		0435F7F8D60D5CA1E4E4CAD2422C5D54 /* Pods-Touchanoid-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Touchanoid-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0D1583ADE8D7D672969F4DF1FD23D08D /* Warp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Warp-umbrella.h"; sourceTree = "<group>"; };
+		1FED186321F3DAEB5B05D71F34860D65 /* Warp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Warp.modulemap; sourceTree = "<group>"; };
+		21C9E99E9CC5C4C67FB4F2CCAF21C912 /* Pods-Touchanoid-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Touchanoid-umbrella.h"; sourceTree = "<group>"; };
+		2D8084EFEC576C08960D9BDFDA2B206D /* WRPProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPProtocols.swift; path = Source/WRPProtocols.swift; sourceTree = "<group>"; };
+		3A1CDC7E6FA7B6D93376A00DFBECA21C /* Warp-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Warp-prefix.pch"; sourceTree = "<group>"; };
+		420202E0B4AF674465B7D87A7584664C /* Warp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Warp.xcconfig; sourceTree = "<group>"; };
+		462C4D02135B4DA6BC649B82019E016D /* WRPStructs.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPStructs.swift; path = Source/WRPStructs.swift; sourceTree = "<group>"; };
+		500B7337E84D767117B0C33A5E813682 /* Pods-Touchanoid-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Touchanoid-Info.plist"; sourceTree = "<group>"; };
+		524A3D2276E3D94585DB81AC6BEB8437 /* Warp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Warp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63E582502AF2D7E818B3C0A404DEE5D5 /* WRPObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPObject.swift; path = Source/WRPObject.swift; sourceTree = "<group>"; };
+		7A20EA7228BAF4C4462D2459542888B2 /* Pods-Touchanoid.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Touchanoid.debug.xcconfig"; sourceTree = "<group>"; };
+		811100E4D4D742ED3EE5BE14E5C7EF81 /* Pods_Touchanoid.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Touchanoid.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96208F4A97EE2DB2B94BC6A33B3F920F /* Pods-Touchanoid.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Touchanoid.modulemap"; sourceTree = "<group>"; };
+		99ACEA0B29B43C16679D6C43678581F1 /* Pods-Touchanoid-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Touchanoid-dummy.m"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A9729C0686F3B598E3874959C202E1D1 /* Warp-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Warp-Info.plist"; sourceTree = "<group>"; };
+		AEAC0EC5426E87E2EA9A46446553A03A /* Warp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Warp-dummy.m"; sourceTree = "<group>"; };
+		C8250871113A756587AA762776CB6126 /* WRPExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPExtensions.swift; path = Source/WRPExtensions.swift; sourceTree = "<group>"; };
+		D1D112DF2CE944BA320A806C1E03524C /* Pods-Touchanoid-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Touchanoid-frameworks.sh"; sourceTree = "<group>"; };
+		DE7600DA0C6F52A5B7D408F79564753F /* Pods-Touchanoid-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Touchanoid-acknowledgements.plist"; sourceTree = "<group>"; };
+		F1BE33391B54E6E72D4B59FF7A7A4B9C /* WRPEnums.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WRPEnums.swift; path = Source/WRPEnums.swift; sourceTree = "<group>"; };
+		F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		FB6E5AA56EA2CDBA65A926EB396DA61F /* Pods-Touchanoid.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Touchanoid.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2AC0FAAF9F0E891E5344A0505D8AE83A /* Frameworks */ = {
+		311203446196CE3E1703813338CC2666 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E78444642F35419ACF80625745F5C73 /* Cocoa.framework in Frameworks */,
+				E582018BC8F3E9ADA44DE29CE4E64019 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D41C7D540441CCAAA776968D7351711F /* Frameworks */ = {
+		B7A7573C600A957550F397F9B24B5CE6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31C283F8BA4B7E8F51420E2DDB0DED29 /* Cocoa.framework in Frameworks */,
+				44594CA0A97CB702D2616FA955A0B3D4 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04C068A18C5413F804A2959126093416 /* OS X */ = {
+		028D96B7FB8EEEB05BFE7E6909F4F496 /* Pods-Touchanoid */ = {
 			isa = PBXGroup;
 			children = (
-				270DD1219F1E6CF00379D39F252D87C6 /* Cocoa.framework */,
-			);
-			name = "OS X";
-			sourceTree = "<group>";
-		};
-		216A87D1B605A0D1A37C00ECA6862E47 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DD2D199BA5D3C293637F2CDDA20D678A /* Warp */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				04C068A18C5413F804A2959126093416 /* OS X */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		47AFCC9E5B0D5596523444149CBA3CE0 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				43EF190382CF98C5BB2696D346FAEAF0 /* Info.plist */,
-				0AD9E4310D1BCC0E92A2E746ED452291 /* Warp.modulemap */,
-				FE78DFF7387E26943C2C14A308E7A26F /* Warp.xcconfig */,
-				2F91E485B089DF997A804E7AF47E3A8C /* Warp-dummy.m */,
-				20B62E287D141BB58CBD5C0CD88465EF /* Warp-prefix.pch */,
-				6E78E5F46E486B479E0FB88602B407EC /* Warp-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Warp";
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				39E9EE8210D861DFD82346C1F5EB7218 /* Frameworks */,
-				216A87D1B605A0D1A37C00ECA6862E47 /* Pods */,
-				EB59FA469F3394C2FE658FE7733759EC /* Products */,
-				B7C3E6CC82BF0DC2D68152512106E002 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		8EDD1DE554E53B268C24803A9AEB4760 /* Pods-Touchanoid */ = {
-			isa = PBXGroup;
-			children = (
-				1E6DA5AA5ECFA19B63359152A8E26273 /* Info.plist */,
-				54B6A048291B4C9C57790B8A24997911 /* Pods-Touchanoid.modulemap */,
-				DED0ABFE51BA0CDE691ABCF9C287B9CB /* Pods-Touchanoid-acknowledgements.markdown */,
-				C10ED9D61276CCDDCA4F4F7E50E70EDD /* Pods-Touchanoid-acknowledgements.plist */,
-				A1D9500184BB888C444D955AEAACA85E /* Pods-Touchanoid-dummy.m */,
-				0E066DDE7707C5DC4256D43BB73EBBF9 /* Pods-Touchanoid-frameworks.sh */,
-				F8F55ED23867298D509BC00EA279B548 /* Pods-Touchanoid-resources.sh */,
-				F4AA7AB90D3C1465C9480BA8DE00FF6E /* Pods-Touchanoid-umbrella.h */,
-				247E066D4DED5F6E214559151C6FD218 /* Pods-Touchanoid.debug.xcconfig */,
-				8F661E7A5586E8AF3179F6297692BF99 /* Pods-Touchanoid.release.xcconfig */,
+				96208F4A97EE2DB2B94BC6A33B3F920F /* Pods-Touchanoid.modulemap */,
+				0435F7F8D60D5CA1E4E4CAD2422C5D54 /* Pods-Touchanoid-acknowledgements.markdown */,
+				DE7600DA0C6F52A5B7D408F79564753F /* Pods-Touchanoid-acknowledgements.plist */,
+				99ACEA0B29B43C16679D6C43678581F1 /* Pods-Touchanoid-dummy.m */,
+				D1D112DF2CE944BA320A806C1E03524C /* Pods-Touchanoid-frameworks.sh */,
+				500B7337E84D767117B0C33A5E813682 /* Pods-Touchanoid-Info.plist */,
+				21C9E99E9CC5C4C67FB4F2CCAF21C912 /* Pods-Touchanoid-umbrella.h */,
+				7A20EA7228BAF4C4462D2459542888B2 /* Pods-Touchanoid.debug.xcconfig */,
+				FB6E5AA56EA2CDBA65A926EB396DA61F /* Pods-Touchanoid.release.xcconfig */,
 			);
 			name = "Pods-Touchanoid";
 			path = "Target Support Files/Pods-Touchanoid";
 			sourceTree = "<group>";
 		};
-		B7C3E6CC82BF0DC2D68152512106E002 /* Targets Support Files */ = {
+		1523563489E2363D88F3DCED34DF6063 /* Warp */ = {
 			isa = PBXGroup;
 			children = (
-				8EDD1DE554E53B268C24803A9AEB4760 /* Pods-Touchanoid */,
+				F1BE33391B54E6E72D4B59FF7A7A4B9C /* WRPEnums.swift */,
+				C8250871113A756587AA762776CB6126 /* WRPExtensions.swift */,
+				63E582502AF2D7E818B3C0A404DEE5D5 /* WRPObject.swift */,
+				2D8084EFEC576C08960D9BDFDA2B206D /* WRPProtocols.swift */,
+				462C4D02135B4DA6BC649B82019E016D /* WRPStructs.swift */,
+				FC938600A3E1F8ECC62242D07575780B /* Support Files */,
+			);
+			path = Warp;
+			sourceTree = "<group>";
+		};
+		457266A85A64C59EE8356CEE22B7D35B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1523563489E2363D88F3DCED34DF6063 /* Warp */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9DFD5345568D5154C9ACD1E30B9682E6 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				028D96B7FB8EEEB05BFE7E6909F4F496 /* Pods-Touchanoid */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		DD2D199BA5D3C293637F2CDDA20D678A /* Warp */ = {
+		CBD43E0947D94E318A0ED1350CFF29ED /* OS X */ = {
 			isa = PBXGroup;
 			children = (
-				7EF20B7C852C511F2A8C9A2C8EABF775 /* WRPEnums.swift */,
-				52AB9BD44106F755B8B200ED8F3FA48B /* WRPExtensions.swift */,
-				7F871C62B7FBD5139ACAD3715C0E6C1E /* WRPObject.swift */,
-				2CDEB9EE80659BF0F375E821D0986463 /* WRPStructs.swift */,
-				47AFCC9E5B0D5596523444149CBA3CE0 /* Support Files */,
+				F940C819049CFF8741C0F5E3E075E607 /* Cocoa.framework */,
 			);
-			name = Warp;
-			path = Warp;
+			name = "OS X";
 			sourceTree = "<group>";
 		};
-		EB59FA469F3394C2FE658FE7733759EC /* Products */ = {
+		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
-				E9A3DD6DBD0FA54929C2B2992BF952B7 /* Pods_Touchanoid.framework */,
-				296E17F0807BFA732E6261491E398537 /* Warp.framework */,
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */,
+				457266A85A64C59EE8356CEE22B7D35B /* Pods */,
+				E0A8CEA75662AA26AD0D97A68B08F5DE /* Products */,
+				9DFD5345568D5154C9ACD1E30B9682E6 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		E0A1E60606E0BF6E2E10F1F01350DFE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBD43E0947D94E318A0ED1350CFF29ED /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E0A8CEA75662AA26AD0D97A68B08F5DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				811100E4D4D742ED3EE5BE14E5C7EF81 /* Pods_Touchanoid.framework */,
+				524A3D2276E3D94585DB81AC6BEB8437 /* Warp.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FC938600A3E1F8ECC62242D07575780B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1FED186321F3DAEB5B05D71F34860D65 /* Warp.modulemap */,
+				420202E0B4AF674465B7D87A7584664C /* Warp.xcconfig */,
+				AEAC0EC5426E87E2EA9A46446553A03A /* Warp-dummy.m */,
+				A9729C0686F3B598E3874959C202E1D1 /* Warp-Info.plist */,
+				3A1CDC7E6FA7B6D93376A00DFBECA21C /* Warp-prefix.pch */,
+				0D1583ADE8D7D672969F4DF1FD23D08D /* Warp-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Warp";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4E3D530A1D3FBA9564A91FBF7477E7F0 /* Headers */ = {
+		4E29BE366C2E4AF2E2C80D2F1D049E40 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C3980CE3685C94F2850625F595113A7 /* Warp-umbrella.h in Headers */,
+				A69F13DBED18F3F66584574D93965682 /* Pods-Touchanoid-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B84553C93B56EA078B5B56B40E8B1F90 /* Headers */ = {
+		C848C31AFCF118B2C8A4ABAE707053EF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC3A8D187EB5AB5D337E40C3BE147ABC /* Pods-Touchanoid-umbrella.h in Headers */,
+				B04F735A2940CD45E945010EC1897491 /* Warp-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		51ACA31133ECC9D64BE804B0C1D1D67C /* Warp */ = {
+		7D22C30C81AD88D8F3C7D53E159BD73A /* Pods-Touchanoid */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E286617E4F0C20BAA619A2450B0BC13 /* Build configuration list for PBXNativeTarget "Warp" */;
+			buildConfigurationList = 3AC1903FC0BC430D01D9CA0FA053B4DB /* Build configuration list for PBXNativeTarget "Pods-Touchanoid" */;
 			buildPhases = (
-				F2B9D5F97DE116CD01A7D3AF344FB45F /* Sources */,
-				D41C7D540441CCAAA776968D7351711F /* Frameworks */,
-				4E3D530A1D3FBA9564A91FBF7477E7F0 /* Headers */,
+				4E29BE366C2E4AF2E2C80D2F1D049E40 /* Headers */,
+				AA643681289A2EC1A181F8417D94571D /* Sources */,
+				311203446196CE3E1703813338CC2666 /* Frameworks */,
+				650431B81C6C6B3C2C72557FFD7E1AB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8BA436A9024D8FEFFB900D77DD88142B /* PBXTargetDependency */,
+			);
+			name = "Pods-Touchanoid";
+			productName = "Pods-Touchanoid";
+			productReference = 811100E4D4D742ED3EE5BE14E5C7EF81 /* Pods_Touchanoid.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F8772A9E4C3E446123ACE0CE0881319B /* Warp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAB745C12BDB093A63E16A476E8F25D8 /* Build configuration list for PBXNativeTarget "Warp" */;
+			buildPhases = (
+				C848C31AFCF118B2C8A4ABAE707053EF /* Headers */,
+				F381981E0FBB006081F6C9A05C8251B0 /* Sources */,
+				B7A7573C600A957550F397F9B24B5CE6 /* Frameworks */,
+				3BA1990069E73A4F87F239D1AA0138D7 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -209,117 +229,211 @@
 			);
 			name = Warp;
 			productName = Warp;
-			productReference = 296E17F0807BFA732E6261491E398537 /* Warp.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		BC5504AB636FCF09F19674839303B0F6 /* Pods-Touchanoid */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BDCAD10C39890B2AF4E3BAAAE61D865E /* Build configuration list for PBXNativeTarget "Pods-Touchanoid" */;
-			buildPhases = (
-				3FBAE88C821A2AA80F14A7A7343A6688 /* Sources */,
-				2AC0FAAF9F0E891E5344A0505D8AE83A /* Frameworks */,
-				B84553C93B56EA078B5B56B40E8B1F90 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				15675CC4003BFB640E74F5B55B72587E /* PBXTargetDependency */,
-			);
-			name = "Pods-Touchanoid";
-			productName = "Pods-Touchanoid";
-			productReference = E9A3DD6DBD0FA54929C2B2992BF952B7 /* Pods_Touchanoid.framework */;
+			productReference = 524A3D2276E3D94585DB81AC6BEB8437 /* Warp.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = EB59FA469F3394C2FE658FE7733759EC /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = E0A8CEA75662AA26AD0D97A68B08F5DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BC5504AB636FCF09F19674839303B0F6 /* Pods-Touchanoid */,
-				51ACA31133ECC9D64BE804B0C1D1D67C /* Warp */,
+				7D22C30C81AD88D8F3C7D53E159BD73A /* Pods-Touchanoid */,
+				F8772A9E4C3E446123ACE0CE0881319B /* Warp */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXSourcesBuildPhase section */
-		3FBAE88C821A2AA80F14A7A7343A6688 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		3BA1990069E73A4F87F239D1AA0138D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				782CB128A4C51623E2D09A7EE006EE93 /* Pods-Touchanoid-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F2B9D5F97DE116CD01A7D3AF344FB45F /* Sources */ = {
+		650431B81C6C6B3C2C72557FFD7E1AB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA643681289A2EC1A181F8417D94571D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDB6C37ADA0EDCEE3B6BE003EBAC9F9D /* Warp-dummy.m in Sources */,
-				B2FE252082A7EFA49BB1E7CE09AFB16B /* WRPEnums.swift in Sources */,
-				E663A8C8965E918646C26B887C16EACB /* WRPExtensions.swift in Sources */,
-				E51AA421EA1569456EC9BBEF714E3F20 /* WRPObject.swift in Sources */,
-				9226754139DDF5CF0166F17CD3908A9F /* WRPStructs.swift in Sources */,
+				EF6B162A571D9E704794D2CE4852BDAF /* Pods-Touchanoid-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F381981E0FBB006081F6C9A05C8251B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C53CF93DCED19DA6472D0C709101E5A /* Warp-dummy.m in Sources */,
+				99ADE5B61F33277EA5255AFC220EF98C /* WRPEnums.swift in Sources */,
+				25FD106CB6E633F7124D8DFADB0581A4 /* WRPExtensions.swift in Sources */,
+				5E6AB1A6F98E99D005CEA07CFA616DB1 /* WRPObject.swift in Sources */,
+				D9B1306619F55356D5AE5601FE6FA704 /* WRPProtocols.swift in Sources */,
+				68175BCF96FCE8F11E283DE99FC02A8E /* WRPStructs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		15675CC4003BFB640E74F5B55B72587E /* PBXTargetDependency */ = {
+		8BA436A9024D8FEFFB900D77DD88142B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Warp;
-			target = 51ACA31133ECC9D64BE804B0C1D1D67C /* Warp */;
-			targetProxy = 738F4A693D1AC40DBD94877BCFE73871 /* PBXContainerItemProxy */;
+			target = F8772A9E4C3E446123ACE0CE0881319B /* Warp */;
+			targetProxy = B6D646474FD99F5CD865B99F8835567C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		17A6C058527ACB60B433A4585C1E4FCC /* Release */ = {
+		1D16FD12FE775354968A9A3A1F592BF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F661E7A5586E8AF3179F6297692BF99 /* Pods-Touchanoid.release.xcconfig */;
+			baseConfigurationReference = 7A20EA7228BAF4C4462D2459542888B2 /* Pods-Touchanoid.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_VERSION = A;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Touchanoid/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Touchanoid/Pods-Touchanoid-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = "Target Support Files/Pods-Touchanoid/Pods-Touchanoid.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Touchanoid;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2AE0D8B39827576460938522CAB2F560 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		35467FD9B6E4DB760FE879D461015AA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB6E5AA56EA2CDBA65A926EB396DA61F /* Pods-Touchanoid.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "Target Support Files/Pods-Touchanoid/Pods-Touchanoid-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MODULEMAP_FILE = "Target Support Files/Pods-Touchanoid/Pods-Touchanoid.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -327,228 +441,167 @@
 			};
 			name = Release;
 		};
-		276FF7C0D181ABF0CDF02EB69C1786BD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 247E066D4DED5F6E214559151C6FD218 /* Pods-Touchanoid.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_VERSION = A;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-Touchanoid/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = "Target Support Files/Pods-Touchanoid/Pods-Touchanoid.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_Touchanoid;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		34342BBF37D3A9ED85FF2EB654934920 /* Debug */ = {
+		816C679D58750316935F7386A438309D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		686973D113074C70B5D055789BC237ED /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE78DFF7387E26943C2C14A308E7A26F /* Warp.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_VERSION = A;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Warp/Warp-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Warp/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MODULEMAP_FILE = "Target Support Files/Warp/Warp.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Warp;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E88FB932E43BF08A198FE18867D49407 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE78DFF7387E26943C2C14A308E7A26F /* Warp.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_VERSION = A;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Warp/Warp-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Warp/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MODULEMAP_FILE = "Target Support Files/Warp/Warp.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = Warp;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		B3D7D7F7E6C103AF0DDB936A8B30AD00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 420202E0B4AF674465B7D87A7584664C /* Warp.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Warp/Warp-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Warp/Warp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/Warp/Warp.modulemap";
+				PRODUCT_MODULE_NAME = Warp;
+				PRODUCT_NAME = Warp;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		F6FC88CB717F413199C282718D2DC09F /* Release */ = {
+		D3D73DE467484081D1F5F2B5E81E1327 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 420202E0B4AF674465B7D87A7584664C /* Warp.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/Warp/Warp-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Warp/Warp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "Target Support Files/Warp/Warp.modulemap";
+				PRODUCT_MODULE_NAME = Warp;
+				PRODUCT_NAME = Warp;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1E286617E4F0C20BAA619A2450B0BC13 /* Build configuration list for PBXNativeTarget "Warp" */ = {
+		3AC1903FC0BC430D01D9CA0FA053B4DB /* Build configuration list for PBXNativeTarget "Pods-Touchanoid" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E88FB932E43BF08A198FE18867D49407 /* Debug */,
-				686973D113074C70B5D055789BC237ED /* Release */,
+				1D16FD12FE775354968A9A3A1F592BF3 /* Debug */,
+				35467FD9B6E4DB760FE879D461015AA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				34342BBF37D3A9ED85FF2EB654934920 /* Debug */,
-				F6FC88CB717F413199C282718D2DC09F /* Release */,
+				816C679D58750316935F7386A438309D /* Debug */,
+				2AE0D8B39827576460938522CAB2F560 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDCAD10C39890B2AF4E3BAAAE61D865E /* Build configuration list for PBXNativeTarget "Pods-Touchanoid" */ = {
+		DAB745C12BDB093A63E16A476E8F25D8 /* Build configuration list for PBXNativeTarget "Warp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				276FF7C0D181ABF0CDF02EB69C1786BD /* Debug */,
-				17A6C058527ACB60B433A4585C1E4FCC /* Release */,
+				B3D7D7F7E6C103AF0DDB936A8B30AD00 /* Debug */,
+				D3D73DE467484081D1F5F2B5E81E1327 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }

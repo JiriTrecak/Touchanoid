@@ -49,12 +49,17 @@ open class WRPObject: NSObject {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Properties
     
+    // Stores original dictionary if needed that's been used for parsing
+    open var originalRawData: [String: Any]? = nil
+    
+    
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Setup
     
     override public init() {
         
         super.init()
+        self.postInit()
         // No initialization required - nothing to fill object with
     }
     
@@ -63,6 +68,7 @@ open class WRPObject: NSObject {
         
         if let jsonData: Data = fromJSON.data(using: String.Encoding.utf8, allowLossyConversion: true) {
             do {
+                // Deserialize the object from the json
                 let jsonObject: AnyObject? = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject?
                 self.init(parameters: jsonObject as! NSDictionary)
             } catch let error as NSError {
@@ -86,14 +92,22 @@ open class WRPObject: NSObject {
         super.init()
         
         self.preInit()
+        
+        // Debug the object creation
         if self.debugInstantiate() {
             NSLog("Object type %@\nParsing using %@", self.self, parameters)
+        }
+        
+        // Store the original raw data
+        if self.storeRawData() {
+            self.originalRawData = parameters as? [String: Any]
         }
         
         self.fillValues(parameters)
         self.processClosestRelationships(parameters)
         self.postInit()
     }
+    
     
     required public init(parameters: NSDictionary, parentObject: WRPObject?) {
         
@@ -102,6 +116,11 @@ open class WRPObject: NSObject {
         self.preInit()
         if self.debugInstantiate() {
             NSLog("Object type %@\nParsing using %@", self.self, parameters)
+        }
+        
+        // Store the original raw data
+        if self.storeRawData() {
+            self.originalRawData = parameters as? [String: Any]
         }
         
         self.fillValues(parameters)
@@ -249,6 +268,13 @@ open class WRPObject: NSObject {
                     forKey: element.localName, optional: element.optional, temporaryOptional: element.remoteNames.count > 1)) { break }
             }
             
+        // Handle uuid data type
+        case .uuid:
+            for elementRemoteName in element.remoteNames {
+                if (self.setValue(.any, value: self.uuidFromParameters(parameters, key: elementRemoteName) as AnyObject?,
+                    forKey: element.localName, optional: element.optional, temporaryOptional: element.remoteNames.count > 1)) { break }
+            }
+            
         // Handle boolean data type
         case .bool:
             for elementRemoteName in element.remoteNames {
@@ -304,6 +330,21 @@ open class WRPObject: NSObject {
                 if (self.setValue(.any, value: self.dictionaryFromParameters(parameters, key: elementRemoteName),
                     forKey: element.localName, optional: element.optional, temporaryOptional: element.remoteNames.count > 1)) { break }
             }
+            
+        // Handle data data type
+        case .data:
+            for elementRemoteName in element.remoteNames {
+                if (self.setValue(.any, value: self.dataFromParameters(parameters, key: elementRemoteName),
+                    forKey: element.localName, optional: element.optional, temporaryOptional: element.remoteNames.count > 1)) { break }
+            }
+            
+        // Handle enum data type
+        case .option:
+            for elementRemoteName in element.remoteNames {
+                if let value = self.anyFromParameters(parameters, key: elementRemoteName) {
+                    element.assignValueToBoundProperty(fromValue: value)
+                }
+            }
         }
     }
     
@@ -328,7 +369,8 @@ open class WRPObject: NSObject {
             
             if objectData is NSDictionary {
                 
-                guard let classType = self.elementClassType(objectData as! NSDictionary, relationDescriptor: element) else {
+                let allocationInfo = self.elementClassType(objectData as! NSDictionary, relationDescriptor: element)
+                guard let classType = allocationInfo.allocationClass, allocationInfo.isValid else {
                     return nil
                 }
                 
@@ -371,11 +413,15 @@ open class WRPObject: NSObject {
             // While the relationship is .ToMany, we can actually add it from single entry
             if objectDataPack is NSDictionary {
                 
+                // Get the allocation info
+                let allocationInfo = self.elementClassType(objectDataPack as! NSDictionary, relationDescriptor: element)
+                
                 // Always override local property, there is no inserting allowed
                 var objects: [WRPObject]? = [WRPObject]()
-                self.setValue(objects, forKey: element.localName)
+                // self.setValue(objects, forKey: element.localName)
                 
-                guard let classType = self.elementClassType(objectDataPack as! NSDictionary, relationDescriptor: element) else {
+                // Only assign objects that are valid (for multi-relationships where only one is valid, similar to property master keys)
+                guard let classType = allocationInfo.allocationClass, allocationInfo.isValid else {
                     return
                 }
                 
@@ -406,14 +452,17 @@ open class WRPObject: NSObject {
                 
                 // Always override local property, there is no inserting allowed
                 var objects: [WRPObject]? = [WRPObject]()
-                self.setValue(objects, forKey: element.localName)
+                // self.setValue(objects, forKey: element.localName)
                 
                 // Fill that property with data
                 for objectData in (objectDataPack as! NSArray) {
                     
-                    // Skip generation of this object, if the class does not exist
-                    guard let classType = self.elementClassType(objectData as! NSDictionary, relationDescriptor: element) else {
-                        continue
+                    // If one object
+                    let allocationInfo = self.elementClassType(objectData as! NSDictionary, relationDescriptor: element)
+                    
+                    // Only assign objects that are valid (for multi-relationships where only one is valid, similar to property master keys)
+                    guard let classType = allocationInfo.allocationClass, allocationInfo.isValid else {
+                        return
                     }
                     
                     // Create object
@@ -448,20 +497,22 @@ open class WRPObject: NSObject {
         }
     }
     
-    fileprivate func elementClassType(_ element: NSDictionary, relationDescriptor: WRPRelation) -> WRPObject.Type? {
+    fileprivate func elementClassType(_ element: NSDictionary, relationDescriptor: WRPRelation) -> (allocationClass: WRPObject.Type?, isValid: Bool) {
         
         // If there is only one class to pick from (no transform function), return the type
         if let type = relationDescriptor.modelClassType {
-            return type
+            return (allocationClass: type, isValid: true)
             
             // Otherwise use transformation function to get object type from string key
-        } else if let transformer = relationDescriptor.modelClassTypeTransformer, let key = relationDescriptor.modelClassTypeKey {
-            return transformer(element.object(forKey: key) as! String)
+        } else if let transformer = relationDescriptor.modelClassTypeTransformer, let key = relationDescriptor.modelClassTypeKey as? String {
+            if let value = element.object(forKey: key) as? String {
+                return (allocationClass: transformer(value), isValid: true)
+            } else {
+                return (allocationClass: nil, isValid: false)
+            }
         }
         
-        // Transformation failed
-        // TODO: Better error handling
-        return WRPObject.self
+        return (allocationClass: nil, isValid: false)
     }
     
     
@@ -503,6 +554,13 @@ open class WRPObject: NSObject {
     }
     
     
+    
+    fileprivate func setEnum<T: RawRepresentable>(value: T, type: T.Type) {
+        
+        let rawValue = value.rawValue
+    }
+    
+    
     fileprivate func setDictionary(_ value: Dictionary<AnyKey, AnyKey>?, forKey: String, optional: Bool, temporaryOptional: Bool) -> Bool {
         
         if ((optional || temporaryOptional) && value == nil) {
@@ -517,10 +575,26 @@ open class WRPObject: NSObject {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Variable creation
     
+    fileprivate func anyFromParameters(_ parameters: NSDictionary, key: String) -> Any? {
+        
+        return parameters.value(forKeyPath: key)
+        
+        return nil
+    }
+    
     fileprivate func stringFromParameters(_ parameters: NSDictionary, key: String) -> String? {
         
         if let value: NSString = parameters.value(forKeyPath: key) as? NSString {
             return value as String
+        }
+        
+        return nil
+    }
+    
+    fileprivate func uuidFromParameters(_ parameters: NSDictionary, key: String) -> UUID? {
+        
+        if let value: NSString = parameters.value(forKeyPath: key) as? NSString {
+            return UUID(uuidString: value as String)!
         }
         
         return nil
@@ -584,6 +658,7 @@ open class WRPObject: NSObject {
             // Create date formatter
             let dateFormatter: DateFormatter = DateFormatter()
             dateFormatter.dateFormat = format
+            dateFormatter.calendar = Calendar(identifier: .gregorian)
             
             return dateFormatter.date(from: value)
         }
@@ -606,6 +681,18 @@ open class WRPObject: NSObject {
         
         if let value: NSDictionary = parameters.value(forKeyPath: key) as? NSDictionary {
             return value
+        }
+        
+        return nil
+    }
+    
+    
+    
+    fileprivate func dataFromParameters(_ parameters: NSDictionary, key: String) -> NSData? {
+        
+        if let value: String = parameters.value(forKeyPath: key) as? String {
+            let data = Data(base64Encoded: value)
+            return data as? NSData
         }
         
         return nil
@@ -667,7 +754,12 @@ open class WRPObject: NSObject {
             }
             
             // Get actual value of property
-            let actualValue: AnyObject? = self.value(forKey: element.localName) as AnyObject?
+            let actualValue: Any?
+            if element.hasBoundValue {
+                actualValue = element.valueOfBoundProperty()
+            } else {
+                actualValue = self.value(forKey: element.localName) as Any?
+            }
             
             // Check for nil, if it is nil, we add <NSNull> object instead of value
             if (actualValue == nil) {
@@ -676,7 +768,7 @@ open class WRPObject: NSObject {
                 }
             } else {
                 // Otherwise add value itself
-                outputParams.setObject(self.valueOfElement(element, value: actualValue!), forKeyPath: element.masterRemoteName)
+                outputParams.setObject(self.valueOfElement(element, value: actualValue!) as AnyObject, forKeyPath: element.masterRemoteName)
             }
         }
         
@@ -765,21 +857,57 @@ open class WRPObject: NSObject {
     }
     
     
-    fileprivate func valueOfElement(_ element: WRPProperty, value: AnyObject) -> AnyObject {
+    fileprivate func valueOfElement(_ element: WRPProperty, value: Any) -> Any {
         
         switch element.elementDataType {
         case .int:
-            return NSNumber(value: value as! Int as Int)
+            return NSNumber(value: value as! Int)
         case .float:
-            return NSNumber(value: value as! Float as Float)
+            if let value = value as? Float {
+                if value.floatingPointClass == .quietNaN ||
+                    value.floatingPointClass == .signalingNaN {
+                    return NSNumber(value: 0)
+                } else {
+                    return NSNumber(value: value)
+                }
+            } else {
+                return Float(0)
+            }
         case .double:
-            return NSNumber(value: value as! Double as Double)
+            if let value = value as? Double {
+                if value.floatingPointClass == .quietNaN ||
+                    value.floatingPointClass == .signalingNaN {
+                    return NSNumber(value: 0)
+                } else {
+                    return NSNumber(value: value)
+                }
+            } else {
+                return Double(0)
+            }
         case .bool:
-            return NSNumber(value: value as! Bool as Bool)
+            if let value = value as? Bool {
+                return NSNumber(value: value)
+            } else {
+                return false
+            }
         case .date:
-            let formatter: DateFormatter = DateFormatter()
-            formatter.dateFormat = element.format!
-            return formatter.string(from: value as! Date) as AnyObject
+            if let value = value as? Date {
+                let formatter: DateFormatter = DateFormatter()
+                formatter.dateFormat = element.format!
+                return formatter.string(from: value) as AnyObject
+            } else {
+                return Date()
+            }
+        case .data:
+            let serializedData = (value as! Data).base64EncodedString()
+            return serializedData as AnyObject
+        case .uuid:
+            if let value = value as? UUID {
+                return value.uuidString
+            } else {
+                fatalError("Not an UUID")
+                return UUID()
+            }
         default:
             return value
         }
@@ -810,7 +938,7 @@ open class WRPObject: NSObject {
     }
     
     
-    open func updateWithDictionary(_ objectData: NSDictionary) -> Bool {
+    @discardableResult open func updateWithDictionary(_ objectData: NSDictionary) -> Bool {
         
         // Update data of current object
         self.fillValues(objectData)
@@ -838,17 +966,26 @@ open class WRPObject: NSObject {
     override open var debugDescription: String {
         return "Class: \(self.self)\nContent: \(self.toDictionary().debugDescription)"
     }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Data storage
+    
+    open func storeRawData() -> Bool {
+        
+        return false
+    }
+    
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Data duplication
+    
+    open func duplicate() -> WRPObject {
+        
+        let data = self.toDictionary()
+        let ownType = type(of: self)
+        return ownType.init(parameters: data)
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 

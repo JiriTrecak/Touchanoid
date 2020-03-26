@@ -22,8 +22,8 @@ class GameData : WRPObject {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Data object properties
     
-    var levels : [Level] = []
-    var balls : [Ball] = []
+    @objc dynamic var levels : [Level] = []
+    @objc dynamic var balls : [Ball] = []
     
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---

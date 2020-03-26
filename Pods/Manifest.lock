@@ -4,9 +4,13 @@ PODS:
 DEPENDENCIES:
   - Warp
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Warp
+
 SPEC CHECKSUMS:
   Warp: db3b285810bac6e5df511466570d9d57db40c701
 
 PODFILE CHECKSUM: affb60b133f3287e0449840f564b3a2106a801ba
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.7.5
